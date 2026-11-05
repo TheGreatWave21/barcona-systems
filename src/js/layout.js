@@ -5,6 +5,16 @@
 (function () {
   document.documentElement.classList.remove("no-js");
 
+  /* Visitor statistics: GoatCounter (no cookies, no personal data).
+     Only counts on the live site, not when opening the files locally. */
+  if (location.protocol.startsWith("http")) {
+    const gc = document.createElement("script");
+    gc.async = true;
+    gc.src = "https://gc.zgo.at/count.js";
+    gc.dataset.goatcounter = "https://something123.goatcounter.com/count";
+    document.head.appendChild(gc);
+  }
+
   const LOGO = `
     <svg viewBox="0 0 32 32" aria-hidden="true">
       <path d="M2 9V2h7M23 2h7v7M30 23v7h-7M9 30H2v-7" fill="none" stroke="#ff5b1f" stroke-width="2.2"/>
