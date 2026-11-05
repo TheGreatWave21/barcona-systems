@@ -491,3 +491,15 @@
 [data-active="scan"] .tu .part-barcode,
 [data-active="recognise"] .tu .part-vision,
 [data-active="map"] .tu .part-lidar { fill: #c9542a; filter: none; }
+
+/* ---------- Team profiles ---------- */
+.profile { gap: var(--s-3); padding: clamp(1.5rem, 3vw, 2.5rem); }
+.profile-head { display: flex; align-items: center; gap: var(--s-3); padding-bottom: var(--s-3); border-bottom: 1px solid var(--line); }
+.profile-head .avatar { width: 72px; height: 72px; border-radius: 18px; font-size: 1.35rem; flex: none; }
+.profile-head h3 { font-size: 1.5rem; margin: 0.35rem 0 0; }
+.profile > p { color: var(--muted); line-height: 1.65; margin: 0; }
+.profile-focus h4 { font-family: var(--font-mono); font-stretch: 100%; font-size: var(--fs-xs); font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); margin: 0 0 0.7rem; }
+.profile-focus ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
+.profile-focus li { position: relative; padding-left: 1.3rem; color: var(--text); font-size: 0.96rem; }
+.profile-focus li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 7px; height: 7px; border-radius: 2px; background: var(--accent); }
+.profile .chips { padding-top: var(--s-1); }
