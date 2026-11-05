@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Barcona Systems | Autonomous vision for real-time inventory control</title>
+  <meta name="description" content="Barcona Systems builds BARCONA AI, a warehouse vision core that detects, reads and assigns barcodes, deployed on forklift-mounted Detection Units or the autonomous TraceUnit-1-30x.">
+  <meta property="og:title" content="Barcona Systems | Inventory that sees itself">
+  <meta property="og:description" content="Autonomous vision systems for real-time inventory control. Built in Lörrach, Germany.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0a0b0d">
+  <link rel="icon" href="public/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="src/css/tokens.css">
+  <link rel="stylesheet" href="src/css/base.css">
+  <link rel="stylesheet" href="src/css/components.css">
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">Warehouse vision AI · Built in Lörrach</p>
+          <h1>
+            <span class="line"><span>Inventory</span></span>
+            <span class="line"><span style="--d:.1s">that <em>sees</em></span></span>
+            <span class="line"><span style="--d:.2s">itself.</span></span>
+          </h1>
+          <p class="lead">BARCONA AI detects, reads and assigns every barcode in your warehouse, and flags what doesn't add up. It runs on a camera mounted to the forklifts you already have, or on an autonomous robot.</p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="pilot.html">Become a pilot partner <span class="arrow">→</span></a>
+            <a class="btn btn-ghost" href="#deploy">See the products</a>
+          </div>
+          <div class="hero-meta">
+            <div>Core<strong>BARCONA AI</strong></div>
+            <div>Hardware<strong>Detection Unit · TraceUnit</strong></div>
+            <div>Based in<strong>Lörrach, Germany</strong></div>
+          </div>
+        </div>
+        <div class="hud hud-corners">
+          <span class="hud-label hud-label--tl"><span class="rec"></span>Live · Detection Unit</span>
+          <span class="hud-label hud-label--tr">BARCONA AI core</span>
+          <span class="hud-label hud-label--bl">Detect · Read · Assign · Check</span>
+          <span class="hud-label hud-label--br">Output: <b>results.xlsx</b></span>
+          <div data-include="forklift" data-live></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Detect</span><span>Read</span><span>Assign</span><span>Check</span><span>Multi-frame tracking</span><span>Forklift-mounted</span><span>Autonomous scanning</span><span>Excel output</span>
+        <span>Detect</span><span>Read</span><span>Assign</span><span>Check</span><span>Multi-frame tracking</span><span>Forklift-mounted</span><span>Autonomous scanning</span><span>Excel output</span>
+      </div>
+    </div>
+
+    <!-- ============ PROBLEM ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal>
+            <p class="eyebrow">The problem</p>
+            <h2>Warehouses lose track of what they already own.</h2>
+          </div>
+          <p class="lead" data-reveal style="--d:.1s">Stock gets put in the wrong place, labels get damaged and manual counts lag days behind reality. Each mistake costs time to search, re-pick and correct.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card" data-reveal>
+            <span class="num">01 / MISPLACED</span>
+            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/></svg></div>
+            <h3>Wrong shelf, lost item</h3>
+            <p>A package in the wrong location is effectively gone until someone stumbles over it.</p>
+          </article>
+          <article class="card" data-reveal style="--d:.08s">
+            <span class="num">02 / MANUAL</span>
+            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+            <h3>Counting takes people</h3>
+            <p>Hand scanners and stocktakes tie up staff and only give you a snapshot, never the current state.</p>
+          </article>
+          <article class="card" data-reveal style="--d:.16s">
+            <span class="num">03 / BLIND SPOTS</span>
+            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><path d="M4 4l16 16"/></svg></div>
+            <h3>Labels fail</h3>
+            <p>Damaged, covered or missing barcodes break systems that rely on scanning alone.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BARCONA AI ============ -->
+    <section class="section section--line" id="ai">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal>
+            <p class="eyebrow">BARCONA AI</p>
+            <h2>One image in. A structured result out.</h2>
+          </div>
+          <p class="lead" data-reveal style="--d:.1s">Our software core turns camera images and video into barcode values, location assignments and clear status flags, ready for Excel or your systems.</p>
+        </div>
+        <div data-reveal style="margin-bottom:var(--s-5)">
+          <div data-include="detect"></div>
+          <p class="dd-caption">Reconstruction of a real BARCONA AI result on a warehouse shelf. Labels, brands and IDs are anonymised; detection classes, statuses and Excel columns match the pipeline output.</p>
+        </div>
+        <ol class="process">
+          <li data-reveal><h3>Detect</h3><p>Handling-unit and shelf barcodes, plus shelf-level markings.</p></li>
+          <li data-reveal style="--d:.06s"><h3>Read</h3><p>Locate, prepare and decode each barcode, tracked across video frames.</p></li>
+          <li data-reveal style="--d:.12s"><h3>Assign</h3><p>Link every handling unit to its shelf location.</p></li>
+          <li data-reveal style="--d:.18s"><h3>Check</h3><p>Flag <span class="mono accent" style="white-space:nowrap">NO READ</span>, <span class="mono accent">REVIEW</span> and conflicts, so nothing is guessed.</p></li>
+        </ol>
+        <p style="margin-top:2rem" data-reveal><a class="link-arrow" href="barcona-ai.html">How BARCONA AI works <span>→</span></a></p>
+      </div>
+    </section>
+
+    <!-- ============ TWO WAYS TO DEPLOY ============ -->
+    <section class="section section--line" id="deploy">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal>
+            <p class="eyebrow">Two ways to deploy</p>
+            <h2>Same AI core. Two ways to the shelf.</h2>
+          </div>
+          <p class="lead" data-reveal style="--d:.1s">Use the forklifts you already run, or send an autonomous robot on defined routes. Or combine both.</p>
+        </div>
+        <div class="duo">
+          <a class="duo-card" href="detection-unit.html" data-reveal>
+            <div class="hud hud-corners"><span class="hud-label hud-label--tl"><span class="rec"></span>Detection Unit</span><div data-include="forklift" data-live></div></div>
+            <div class="duo-body">
+              <span class="badge badge--accent" style="justify-self:start;margin:0">Test setup in preparation</span>
+              <h3>Detection Unit</h3>
+              <p>A camera and compute module on existing forklifts. It captures inventory during normal operations, needs less robotics and is built from standard components.</p>
+              <span class="link-arrow">Explore the Detection Unit <span>→</span></span>
+            </div>
+          </a>
+          <a class="duo-card" href="traceunit.html" data-reveal style="--d:.08s">
+            <div class="hud hud-corners"><span class="hud-label hud-label--tl"><span class="rec"></span>TraceUnit-1-30x</span><div data-include="unit" data-live></div></div>
+            <div class="duo-body">
+              <span class="badge" style="justify-self:start;margin:0">Prototype</span>
+              <h3>TraceUnit-1-30x</h3>
+              <p>An autonomous robot that runs its own scan missions on defined routes, independent of forklift traffic, with barcode, AI vision and LiDAR.</p>
+              <span class="link-arrow">Explore the TraceUnit <span>→</span></span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HOW IT WORKS (sticky scene) ============ -->
+    <section class="section section--line" id="how">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal>
+            <p class="eyebrow">Inside the TraceUnit</p>
+            <h2>Three sensors. One picture of your floor.</h2>
+          </div>
+          <p class="lead" data-reveal style="--d:.1s">Each sensor covers for the weaknesses of the others. Together they give a reliable, continuously updated picture of every package.</p>
+        </div>
+
+        <div class="scene" data-scene>
+          <div class="scene-figure" data-active="scan">
+            <div class="hud hud-corners">
+              <span class="hud-label hud-label--tl"><span class="rec"></span>Sensor: <b data-scene-label>Barcode</b></span>
+              <span class="hud-label hud-label--br">TU-1-30X</span>
+              <div data-include="unit"></div>
+            </div>
+            <div class="scene-progress" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          </div>
+
+          <div class="scene-steps">
+            <article class="step" data-step="scan" data-label="Barcode">
+              <p class="tag">01 · Scan</p>
+              <h3>Reads every label it passes</h3>
+              <p>An integrated barcode scanner identifies packages as the unit drives along the aisle. Nobody has to point a hand scanner.</p>
+              <ul><li>Continuous scanning while moving</li><li>Identifies item and package ID</li></ul>
+            </article>
+            <article class="step" data-step="recognise" data-label="AI vision">
+              <p class="tag">02 · Recognise</p>
+              <h3>Sees what labels can't tell it</h3>
+              <p>A camera with AI visual recognition checks what a package actually looks like, so damaged or hidden labels don't leave gaps.</p>
+              <ul><li>Visual cross-check of scanned items</li><li>Works when labels are unreadable</li></ul>
+            </article>
+            <article class="step" data-step="map" data-label="LiDAR">
+              <p class="tag">03 · Map</p>
+              <h3>Knows exactly where everything is</h3>
+              <p>LiDAR maps the space around the unit, giving every detected package a precise position on a live floor map.</p>
+              <ul><li>360° detection range</li><li>Real-time location mapping</li></ul>
+            </article>
+            <article class="step" data-step="flag" data-label="Error detection">
+              <p class="tag">04 · Flag</p>
+              <h3>Spots mistakes immediately</h3>
+              <p>When something is in the wrong place or labelled incorrectly, the system flags it, so your team fixes it now and not at the next stocktake.</p>
+              <ul><li>Misplaced package detection</li><li>Mislabel detection</li></ul>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LIVE MAP DEMO ============ -->
+    <section class="section section--line" id="demo">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal>
+            <p class="eyebrow">From our simulator</p>
+            <h2>Watch a scan mission.</h2>
+          </div>
+          <p class="lead" data-reveal style="--d:.1s">This is the "Basic Barcona Warehouse" scenario from the simulator we use to test navigation and scanning before real hardware: same layout, same barcode IDs, same scan rules.</p>
+        </div>
+        <div class="map-wrap" data-reveal>
+          <div class="map-stage">
+            <span class="hud-label hud-label--tl"><span class="rec"></span>basic_warehouse.json · 18 × 11 m</span>
+            <span class="hud-label hud-label--br">Scan rule: ≤ 3 m · ±25° · line of sight · 40 %/s</span>
+            <canvas id="floor-map" aria-label="Barcona simulator: a robot drives a warehouse aisle and scans five barcodes using a 3 metre, 50 degree scan cone" role="img"></canvas>
+          </div>
+          <dl class="map-side">
+            <div class="readout"><dt>Barcodes scanned</dt><dd class="cyan" data-map="scanned">0/5</dd></div>
+            <div class="readout"><dt>Mission time</dt><dd data-map="elapsed">0.0 s</dd></div>
+            <div class="readout"><dt>State</dt><dd class="orange" data-map="state" style="font-size:1.4rem">Driving</dd></div>
+            <div class="scan-log"><h4>Scan log</h4><ol data-map="log"></ol></div>
+            <div class="legend">
+              <span><i style="background:#5f656e"></i>Not scanned</span>
+              <span><i style="background:#ffc43d"></i>Scan in progress</span>
+              <span><i style="background:#7fe3ff"></i>Scanned</span>
+              <span><i style="background:#ff5b1f"></i>Line of sight blocked</span>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ USE CASES ============ -->
+    <section class="section section--line">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal>
+            <p class="eyebrow">Built for</p>
+            <h2>Wherever stock moves fast.</h2>
+          </div>
+        </div>
+        <div class="grid-3">
+          <article class="card" data-reveal><span class="num">WAREHOUSES</span><h3>Storage &amp; fulfilment</h3><p>Continuous visibility over racks and floor space, without scheduled stocktakes.</p></article>
+          <article class="card" data-reveal style="--d:.08s"><span class="num">DISTRIBUTION</span><h3>Distribution hubs</h3><p>High throughput means high error risk. Catch misplaced items before they ship wrong.</p></article>
+          <article class="card" data-reveal style="--d:.16s"><span class="num">RESEARCH</span><h3>Research environments</h3><p>A flexible platform for testing autonomous inventory and sensor-fusion ideas.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BUILD IN PUBLIC ============ -->
+    <section class="section section--line">
+      <div class="container split split--sticky">
+        <div data-reveal>
+          <p class="eyebrow">Progress</p>
+          <h2>Building in public.</h2>
+          <p class="lead">We're a young team and we share where we are, honestly. Follow along as the TraceUnit moves from CAD to the warehouse floor.</p>
+          <a class="link-arrow" href="news.html">Read the updates <span>→</span></a>
+        </div>
+        <ol class="timeline">
+          <li class="done" data-reveal><time>Aug 2025</time><h3>First CAD design</h3><p>The TraceUnit concept took shape as a full 3D model, covering chassis, sensor mast and drive.</p></li>
+          <li class="done" data-reveal><time>Sep 2025</time><h3>Core software architecture</h3><p>The foundation for sensor input, data processing and mapping was laid out.</p></li>
+          <li class="done" data-reveal><time>Jan 2026</time><h3>New collaboration</h3><p>An external partner joined to support the next phase of development.</p></li>
+          <li class="done" data-reveal><time>2026</time><h3>BARCONA AI software core</h3><p>The TraceUnit idea grew into a full software core: our own dataset and trained models, video tracking, assignment logic, Excel output, tests and documentation.</p></li>
+          <li class="next" data-reveal><time>Next</time><h3>Detection Unit test setup &amp; pilots</h3><p>A first forklift-mounted test setup, followed by pilots in real warehouse conditions.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ TEAM TEASER ============ -->
+    <section class="section section--line">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal>
+            <p class="eyebrow">The team</p>
+            <h2>Software meets hardware.</h2>
+          </div>
+          <a class="link-arrow" href="about.html" data-reveal>About Barcona <span>→</span></a>
+        </div>
+        <div class="team">
+          <article class="person" data-reveal>
+            <div class="avatar">KB</div>
+            <div><span class="role">Co-founder · Lead Software Engineer</span><h3>Kenan Busch</h3></div>
+            <p>Builds BARCONA AI, the software that turns camera images into structured inventory data.</p>
+          </article>
+          <article class="person" data-reveal style="--d:.08s">
+            <div class="avatar avatar--cyan">PW</div>
+            <div><span class="role">Co-founder · Lead Build Engineer</span><h3>Philipp Wirth</h3></div>
+            <p>Designs and builds the Barcona hardware, from CAD to a working machine.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="cta-band" data-reveal>
+          <p class="eyebrow">Pilot program</p>
+          <h2>Help us put BARCONA on a real floor.</h2>
+          <p>We're looking for warehouses and logistics teams who want early access, direct influence on the product and a close working relationship with the people building it.</p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="pilot.html">Become a pilot partner <span class="arrow">→</span></a>
+            <a class="btn btn-ghost" href="contact.html">Ask us anything</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div data-include="footer"></div>
+
+  <script src="src/js/layout.js"></script>
+  <script src="src/js/main.js" defer></script>
+  <script src="src/js/map-demo.js" defer></script>
+  <script src="src/js/detect-demo.js" defer></script>
+</body>
+</html>

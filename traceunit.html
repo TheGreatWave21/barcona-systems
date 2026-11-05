@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TraceUnit-1-30x | Barcona Systems</title>
+  <meta name="description" content="The TraceUnit-1-30x combines barcode scanning, AI visual recognition and LiDAR mapping in one autonomous unit for real-time warehouse inventory tracking.">
+  <meta name="theme-color" content="#0a0b0d">
+  <link rel="icon" href="public/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="src/css/tokens.css">
+  <link rel="stylesheet" href="src/css/base.css">
+  <link rel="stylesheet" href="src/css/components.css">
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="crumbs"><a href="index.html">Home</a> / Product</p>
+          <p class="eyebrow">Flagship prototype</p>
+          <h1 style="white-space:nowrap">TraceUnit&#8209;1&#8209;30x</h1>
+          <p class="lead">One autonomous unit, three sensors, and a live map of every package on your floor.</p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="pilot.html">Request a pilot <span class="arrow">→</span></a>
+            <a class="btn btn-ghost" href="#specs">View specifications</a>
+          </div>
+        </div>
+        <div class="hud hud-corners">
+          <span class="hud-label hud-label--tl"><span class="rec"></span>TraceUnit · prototype</span>
+          <span class="hud-label hud-label--br">Status: <b>prototype</b></span>
+          <div data-include="unit" data-live></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal><p class="eyebrow">Capabilities</p><h2>What it does.</h2></div>
+          <p class="lead" data-reveal>Five capabilities, designed to work together on one machine.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card" data-reveal>
+            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/><path d="M12 1v3M12 20v3M1 12h3M20 12h3"/></svg></div>
+            <h3>Triple-sensor fusion</h3>
+            <p>Barcode scanning, AI visual recognition and LiDAR combined, so one sensor's blind spot is covered by another.</p>
+          </article>
+          <article class="card" data-reveal style="--d:.06s">
+            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15M15 6v15"/></svg></div>
+            <h3>Real-time location mapping</h3>
+            <p>Every detected package appears with its position on a live floor map.</p>
+          </article>
+          <article class="card" data-reveal style="--d:.12s">
+            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18"/><path d="M12 12l6-4"/></svg></div>
+            <h3>360° detection range</h3>
+            <p>Full awareness around the unit, not just in front of it.</p>
+          </article>
+          <article class="card" data-reveal>
+            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 2v6M15 2v6M6 8h12v4a6 6 0 0 1-12 0z"/><path d="M12 18v4"/></svg></div>
+            <h3>Plug-and-play setup</h3>
+            <p>Designed to start working in an existing warehouse without rebuilding infrastructure.</p>
+          </article>
+          <article class="card" data-reveal style="--d:.06s">
+            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/></svg></div>
+            <h3>AI error detection</h3>
+            <p>Automatically flags packages that are misplaced or mislabelled.</p>
+          </article>
+          <article class="card" data-reveal style="--d:.12s">
+            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="7" width="18" height="10" rx="3"/><circle cx="7" cy="19" r="2"/><circle cx="17" cy="19" r="2"/><path d="M12 7V3"/></svg></div>
+            <h3>Fully autonomous</h3>
+            <p>Drives its own route through the aisles, so your team can focus on the work that needs people.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--line">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal><p class="eyebrow">A scan cycle</p><h2>From aisle to answer.</h2></div>
+        </div>
+        <ol class="process">
+          <li data-reveal><h3>Drive</h3><p>The unit follows its route through the aisles on its own.</p></li>
+          <li data-reveal style="--d:.06s"><h3>Sense</h3><p>Barcode, camera and LiDAR capture data at the same time.</p></li>
+          <li data-reveal style="--d:.12s"><h3>Fuse</h3><p>The software combines the readings into one identified, located package.</p></li>
+          <li data-reveal style="--d:.18s"><h3>Report</h3><p>The live map updates, and any errors are flagged to your team.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section section--line" id="specs">
+      <div class="container split split--sticky">
+        <div data-reveal>
+          <p class="eyebrow">Specifications</p>
+          <h2>Spec sheet.</h2>
+          <p class="lead">The TraceUnit is a prototype, so values marked <span class="badge badge--cyan">TBC</span> are still being validated. Ask us for the latest numbers.</p>
+          <a class="link-arrow" href="contact.html">Request the datasheet <span>→</span></a>
+        </div>
+        <table class="spec" data-reveal style="--d:.1s">
+          <tbody>
+            <tr><th>Model</th><td>TraceUnit-1-30x</td></tr>
+            <tr><th>Stage</th><td>Prototype <span class="badge badge--accent">In development</span></td></tr>
+            <tr><th>Identification</th><td>Barcode scanner</td></tr>
+            <tr><th>Recognition</th><td>Camera with AI visual recognition</td></tr>
+            <tr><th>Mapping</th><td>LiDAR, 360° detection range</td></tr>
+            <tr><th>Navigation</th><td>Autonomous</td></tr>
+            <tr><th>Output</th><td>Live floor map with package locations and error flags</td></tr>
+            <tr><th>Setup</th><td>Plug-and-play</td></tr>
+            <tr><th>Dimensions</th><td><span class="badge badge--cyan">TBC</span></td></tr>
+            <tr><th>Runtime / charging</th><td><span class="badge badge--cyan">TBC</span></td></tr>
+            <tr><th>Integrations</th><td><span class="badge badge--cyan">TBC</span><small>Planned: export to existing warehouse systems</small></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section section--line">
+      <div class="container split">
+        <div data-reveal><p class="eyebrow">FAQ</p><h2>Questions.</h2></div>
+        <div class="faq" data-reveal>
+          <details><summary>Can I buy a TraceUnit today?</summary><p>Not yet. The TraceUnit-1-30x is a prototype. We're working with pilot partners to test it under real conditions before any commercial release.</p></details>
+          <details><summary>Does it replace my warehouse management system?</summary><p>No. The TraceUnit is meant to feed accurate, real-time location data into the processes you already have.</p></details>
+          <details><summary>What if a barcode is damaged or missing?</summary><p>That's what the AI camera is for. Visual recognition and LiDAR positioning help identify and locate packages even when the label alone isn't enough.</p></details>
+          <details><summary>How does the TraceUnit compare to the Detection Unit?</summary><p>Both run the same BARCONA AI core. The TraceUnit drives its own defined routes, independent of forklifts. The <a href="detection-unit.html" style="text-decoration:underline">Detection Unit</a> mounts on existing forklifts and needs less robotics. <a href="detection-unit.html#compare" style="text-decoration:underline">See the comparison</a>.</p></details>
+          <details><summary>How do I get involved?</summary><p>Apply for the <a href="pilot.html" style="text-decoration:underline">pilot program</a>, or just <a href="contact.html" style="text-decoration:underline">send us a message</a>.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta-band" data-reveal>
+          <p class="eyebrow">Next step</p>
+          <h2>See it on your own floor.</h2>
+          <p>Pilot partners get early access and help shape what the TraceUnit becomes.</p>
+          <a class="btn btn-primary" href="pilot.html">Become a pilot partner <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div data-include="footer"></div>
+  <script src="src/js/layout.js"></script>
+  <script src="src/js/main.js" defer></script>
+</body>
+</html>

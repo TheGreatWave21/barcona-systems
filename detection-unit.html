@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Detection Unit | Barcona Systems</title>
+  <meta name="description" content="The BARCONA Detection Unit mounts a camera and compute module on existing forklifts and captures inventory during normal warehouse operations, with no extra robots needed.">
+  <meta name="theme-color" content="#0a0b0d">
+  <link rel="icon" href="public/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="src/css/tokens.css">
+  <link rel="stylesheet" href="src/css/base.css">
+  <link rel="stylesheet" href="src/css/components.css">
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="crumbs"><a href="index.html">Home</a> / Detection Unit</p>
+          <p class="eyebrow">New · Forklift-mounted</p>
+          <h1>Inventory on the move.</h1>
+          <p class="lead">The Detection Unit turns the forklifts you already run into inventory scanners. A camera and compute module captures barcodes during normal operations, so there's no extra robot and no extra route.</p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="pilot.html">Join the test phase <span class="arrow">→</span></a>
+            <a class="btn btn-ghost" href="#compare">Compare with TraceUnit</a>
+          </div>
+        </div>
+        <div class="hud hud-corners">
+          <span class="hud-label hud-label--tl"><span class="rec"></span>Detection Unit · Live</span>
+          <span class="hud-label hud-label--br">BARCONA AI core</span>
+          <div data-include="forklift" data-live></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal><p class="eyebrow">The idea</p><h2>Your forklifts already pass every shelf.</h2></div>
+          <p class="lead" data-reveal>Instead of sending people, or a robot, to count stock, the Detection Unit records what's on the shelves while forklifts drive their normal routes.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card" data-reveal>
+            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="7" width="13" height="10" rx="2"/><path d="M16 10l5-3v10l-5-3"/></svg></div>
+            <h3>Camera + compute</h3>
+            <p>One compact module per forklift: a camera to capture the shelves and a compute unit running BARCONA AI.</p>
+          </article>
+          <article class="card" data-reveal style="--d:.06s">
+            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V8l6-4v16"/><path d="M10 12h10v8"/><circle cx="6" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/></svg></div>
+            <h3>Uses existing movements</h3>
+            <p>Captures data during the work that's happening anyway, with no dedicated scan runs.</p>
+          </article>
+          <article class="card" data-reveal style="--d:.12s">
+            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg></div>
+            <h3>Standard components</h3>
+            <p>Built from off-the-shelf parts, so it's quick to mount and easy to roll out across a fleet.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--line">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal><p class="eyebrow">In operation</p><h2>From shelf to spreadsheet.</h2></div>
+        </div>
+        <ol class="process">
+          <li data-reveal><h3>Drive</h3><p>The forklift works as usual. The module records along the way.</p></li>
+          <li data-reveal style="--d:.06s"><h3>Capture</h3><p>Handling-unit and shelf barcodes in the field of view are captured, across several frames.</p></li>
+          <li data-reveal style="--d:.12s"><h3>Process</h3><p>BARCONA AI detects, reads, assigns and checks every sighting.</p></li>
+          <li data-reveal style="--d:.18s"><h3>Compare</h3><p>Results are compared with expected stock, and differences are flagged for a targeted check.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section section--line">
+      <div class="container split">
+        <div data-reveal>
+          <p class="eyebrow">The benefit</p>
+          <h2>Search less. See deviations sooner.</h2>
+        </div>
+        <div class="nownext" data-reveal style="--d:.1s">
+          <div class="panel next"><p class="eyebrow">Today</p><ul><li>Checking manually</li><li>Searching for handling units</li><li>Reconciling stock by hand</li><li>Chasing deviations</li></ul></div>
+          <div class="panel"><p class="eyebrow">With BARCONA</p><ul><li>Sightings recorded automatically</li><li>Results reconciled</li><li>Deviations checked in a targeted way</li></ul></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--line" id="compare">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal><p class="eyebrow">Two ways to deploy</p><h2>Detection Unit or TraceUnit?</h2></div>
+          <p class="lead" data-reveal>Both run the same BARCONA AI core. The difference is how the camera gets to the shelf.</p>
+        </div>
+        <div class="table-scroll" data-reveal>
+          <table class="compare">
+            <thead><tr><th></th><th>Detection Unit</th><th>TraceUnit</th></tr></thead>
+            <tbody>
+              <tr><th>Concept</th><td class="hl">Uses existing forklift movements</td><td class="hl">Autonomous scan missions</td></tr>
+              <tr><th>Setup</th><td>Camera + compute unit per forklift</td><td>Robot per area</td></tr>
+              <tr><th>Development</th><td>Integrate capture, with less robotics</td><td>Navigation, safety and scan operation</td></tr>
+              <tr><th>Coverage</th><td>Depends on driving routes and field of view</td><td>Defined routes, independent of forklifts</td></tr>
+              <tr><th>Scaling</th><td>Mounting from standard components</td><td>Additional autonomous platforms</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="footnote">Both are implementation concepts. Driving routes, field of view and mounting are validated in the pilot.</p>
+      </div>
+    </section>
+
+    <section class="section section--line">
+      <div class="container split">
+        <div data-reveal><p class="eyebrow">FAQ</p><h2>Questions.</h2></div>
+        <div class="faq" data-reveal>
+          <details><summary>Does the forklift driver have to do anything?</summary><p>No. The idea is that capture happens in the background while the forklift does its normal work.</p></details>
+          <details><summary>What if a shelf is never passed?</summary><p>Coverage depends on the driving routes and the camera's field of view. Measuring that is one of the main goals of the pilot. For areas that forklifts rarely visit, the TraceUnit can run defined routes.</p></details>
+          <details><summary>When can we test it?</summary><p>We're aiming for a first Detection Unit test setup within a few weeks. That's a target, not a rollout promise. <a href="pilot.html" style="text-decoration:underline">Apply for the pilot</a> to be part of it.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta-band" data-reveal>
+          <p class="eyebrow">Test phase</p>
+          <h2>Put a Detection Unit on your forklift.</h2>
+          <p>We're looking for a clearly defined pilot area to measure coverage and time saved under real conditions.</p>
+          <a class="btn btn-primary" href="pilot.html">Become a pilot partner <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div data-include="footer"></div>
+  <script src="src/js/layout.js"></script>
+  <script src="src/js/main.js" defer></script>
+</body>
+</html>

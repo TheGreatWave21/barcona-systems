@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BARCONA AI | Barcona Systems</title>
+  <meta name="description" content="BARCONA AI detects, reads, assigns and checks warehouse barcodes from images and video, and delivers a structured result with Excel and interface output.">
+  <meta name="theme-color" content="#0a0b0d">
+  <link rel="icon" href="public/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="src/css/tokens.css">
+  <link rel="stylesheet" href="src/css/base.css">
+  <link rel="stylesheet" href="src/css/components.css">
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <p class="crumbs"><a href="index.html">Home</a> / BARCONA AI</p>
+        <p class="eyebrow">The software core</p>
+        <h1>One warehouse image. One structured result.</h1>
+        <p class="lead">BARCONA AI is the processing layer behind every Barcona product. It finds the barcodes in an image or video, reads them, works out where each one belongs and checks the result before anything goes into your system.</p>
+        <div class="btn-row" style="margin-top:2rem">
+          <a class="btn btn-primary" href="pilot.html">Test it in a pilot <span class="arrow">→</span></a>
+          <a class="btn btn-ghost" href="#steps">The four steps</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal><p class="eyebrow">Architecture</p><h2>A central processing layer.</h2></div>
+          <p class="lead" data-reveal>It doesn't matter where the image comes from. The same core processes it and returns the same kind of result.</p>
+        </div>
+        <div class="pipeline" data-reveal>
+          <div class="pipe-col"><h3>Input</h3><span>Camera image</span><span>Video frames</span><span>Image files</span></div>
+          <div class="pipe-col pipe-core">
+            <div class="core-title">BARCONA AI CORE</div>
+            <div class="core-steps">DETECT · READ<br>ASSIGN · CHECK</div>
+          </div>
+          <div class="pipe-col"><h3>Output</h3><span>Detected barcode values</span><span>Handling-unit ↔ location assignment</span><span>Status &amp; warnings</span><span>Excel / interface</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--line" id="result">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal><p class="eyebrow">A real result</p><h2>What BARCONA sees on a shelf.</h2></div>
+          <p class="lead" data-reveal>Every barcode is detected and classified. Package barcodes are read and linked to their shelf label, anything unreadable stays visible, and the result lands in Excel.</p>
+        </div>
+        <div data-reveal>
+          <div data-include="detect"></div>
+          <p class="dd-caption">Reconstruction of a real BARCONA AI result. Labels, brands and IDs are anonymised; detection classes, statuses and Excel columns match the pipeline output.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--line" id="steps">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal><p class="eyebrow">How it works</p><h2>Four steps to a structured result.</h2></div>
+        </div>
+        <ol class="process">
+          <li data-reveal><h3>Detect</h3><p>Finds handling-unit barcodes, shelf barcodes and the markings that show which shelf level a label belongs to.</p></li>
+          <li data-reveal style="--d:.06s"><h3>Read</h3><p>Locates each barcode precisely, prepares the image region and decodes the value.</p></li>
+          <li data-reveal style="--d:.12s"><h3>Assign</h3><p>Uses position, markings and shelf level to link every handling unit to its storage location.</p></li>
+          <li data-reveal style="--d:.18s"><h3>Check</h3><p>Flags anything uncertain and delivers a clean, structured output. Nothing gets silently guessed.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section section--line">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal><p class="eyebrow">Video &amp; tracking</p><h2>A bad frame doesn't mean a lost barcode.</h2></div>
+          <p class="lead" data-reveal>In video, BARCONA tracks each barcode across several frames. If one frame is blurry, a later, better frame can still deliver the value, and a stable value is kept as the result.</p>
+        </div>
+        <div class="frames">
+          <article class="frame frame--no" data-reveal><div class="frame-view"><div class="code"></div></div><span class="tag">Frame 1</span><h3>No read</h3><p>No reliable barcode value yet.</p></article>
+          <article class="frame frame--read" data-reveal style="--d:.08s"><div class="frame-view"><div class="code"></div></div><span class="tag">Frame 2</span><h3>Read</h3><p>A suitable frame delivers a barcode value.</p></article>
+          <article class="frame frame--ok" data-reveal style="--d:.16s"><div class="frame-view"><div class="code"></div></div><span class="tag">Frame 3</span><h3>Confirmed</h3><p>A stable value is kept as the result.</p></article>
+        </div>
+        <p class="footnote">Simplified illustration. The number of frames varies, and a read is not guaranteed in every case.</p>
+      </div>
+    </section>
+
+    <section class="section section--line">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal><p class="eyebrow">Transparent results</p><h2>Uncertainty stays visible.</h2></div>
+          <p class="lead" data-reveal>When the system isn't sure, it says so. Every result carries a clear status, so your team knows exactly what to check.</p>
+        </div>
+        <div class="statuses">
+          <article class="status st-no" data-reveal><code>NO READ</code><p>The barcode couldn't be read reliably. It stays in the output as a visible gap rather than disappearing.</p></article>
+          <article class="status st-review" data-reveal style="--d:.06s"><code>REVIEW</code><p>A result that needs a human check before it's accepted.</p></article>
+          <article class="status st-conflict" data-reveal style="--d:.12s"><code>CLASS CONFLICT</code><p>It isn't clear what kind of barcode this is, so it's flagged instead of guessed.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--line">
+      <div class="container split split--sticky">
+        <div data-reveal>
+          <p class="eyebrow">Output</p>
+          <h2>From AI result to your systems.</h2>
+          <p class="lead">Results are saved in a form your team can use straight away, and every step can be traced afterwards.</p>
+        </div>
+        <ol class="timeline">
+          <li class="done" data-reveal><time>01 · Input folder</time><h3>New images are picked up</h3><p>Files that are duplicates or already processed are detected automatically.</p></li>
+          <li class="done" data-reveal><time>02 · Pipeline</time><h3>Images are processed and assigned</h3><p>Detect, read, assign and check, as described above.</p></li>
+          <li class="done" data-reveal><time>03 · State &amp; logs</time><h3>Every step is traceable</h3><p>Status, transactions and logs show what happened to each file.</p></li>
+          <li class="done" data-reveal><time>04 · Excel output</time><h3>Results are saved</h3><p>Structured Excel output and an interface for review.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section section--line">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal><p class="eyebrow">Status</p><h2>What's ready. What's next.</h2></div>
+          <p class="lead" data-reveal>Trained on our own dataset of warehouse images built for this use case, and tested automatically across the whole dataset.</p>
+        </div>
+        <div class="nownext">
+          <div class="panel" data-reveal><p class="eyebrow">Already in place</p><ul><li>AI models and our own dataset</li><li>Image and video processing with tracking</li><li>Barcode and assignment logic</li><li>Interface and Excel output</li><li>Tests and documentation</li></ul></div>
+          <div class="panel next" data-reveal style="--d:.08s"><p class="eyebrow">Next step</p><ul><li>Connection to warehouse databases, WMS and ERP</li><li>Live camera integration</li><li>Long-term operational testing</li><li>Industrial integration</li></ul></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta-band" data-reveal>
+          <p class="eyebrow">Two ways to deploy</p>
+          <h2>Same core. Your choice of hardware.</h2>
+          <p>Run BARCONA AI on cameras mounted to the forklifts you already have, or on an autonomous robot with its own routes.</p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="detection-unit.html">Detection Unit <span class="arrow">→</span></a>
+            <a class="btn btn-ghost" href="traceunit.html">TraceUnit</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div data-include="footer"></div>
+  <script src="src/js/layout.js"></script>
+  <script src="src/js/main.js" defer></script>
+  <script src="src/js/detect-demo.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+# Confidential documents: never publish with the website
+*.pptx
+*.ppt
+*.key
+*.docx
+*.xlsx
+/confidential/

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About &amp; team | Barcona Systems</title>
+  <meta name="description" content="Barcona Systems is a student-founded technology startup from Lörrach, Germany, building autonomous vision systems for inventory control.">
+  <meta name="theme-color" content="#0a0b0d">
+  <link rel="icon" href="public/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="src/css/tokens.css">
+  <link rel="stylesheet" href="src/css/base.css">
+  <link rel="stylesheet" href="src/css/components.css">
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <p class="crumbs"><a href="index.html">Home</a> / About</p>
+        <p class="eyebrow">About Barcona</p>
+        <h1>Young team. Real problem. Serious engineering.</h1>
+        <p class="lead">Barcona Systems is a student-founded technology startup from Lörrach in Baden-Württemberg. We build autonomous vision systems that help businesses reduce errors, save time and run their inventory more efficiently.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container split">
+        <div data-reveal><p class="eyebrow">Our story</p><h2>Why we started.</h2></div>
+        <div data-reveal style="--d:.1s">
+          <p class="lead" style="max-width:none">Inventory is one of those problems everyone accepts as normal: things go missing, counts drift and people spend hours searching. We think automation can fix that.</p>
+          <p class="muted">We started with the idea of a robot that does the tracking itself, the TraceUnit-1-30x. Along the way the idea grew into something bigger: BARCONA AI, a software core with our own warehouse dataset and trained models that detects, reads, assigns and checks barcodes from any camera image or video.</p>
+          <p class="muted">Today that core can run on two kinds of hardware: the autonomous TraceUnit, or the Detection Unit, a camera and compute module mounted on the forklifts a warehouse already uses. We design the hardware, write the software and test it ourselves, and we're now looking for partners to take it into real warehouses.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--line">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal><p class="eyebrow">How we work</p><h2>What we believe in.</h2></div>
+        </div>
+        <div class="grid-3">
+          <article class="card" data-reveal><span class="num">01</span><h3>Honest progress</h3><p>We're a prototype-stage company and we say so. We share what works, what doesn't and what's next.</p></article>
+          <article class="card" data-reveal style="--d:.06s"><span class="num">02</span><h3>Hardware and software together</h3><p>We design both sides in-house, so the sensors and the software are built for each other.</p></article>
+          <article class="card" data-reveal style="--d:.12s"><span class="num">03</span><h3>Built with users</h3><p>The best product decisions come from the warehouse floor, which is why our pilot partners have a real say.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--line" id="team">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal><p class="eyebrow">Team</p><h2>The founders.</h2></div>
+          <p class="lead" data-reveal>Two engineers, one covering software and one covering hardware.</p>
+        </div>
+        <div class="team">
+          <article class="person" data-reveal>
+            <!-- To add a photo: <div class="avatar"><img src="public/img/kenan.jpg" alt="Kenan Busch"></div> -->
+            <div class="avatar">KB</div>
+            <div><span class="role">Co-founder · Lead Software Engineer</span><h3>Kenan Busch</h3></div>
+            <p>Leads software development at Barcona, from reading the sensors to building the live floor map. Works mainly in Python, with embedded systems on Raspberry Pi.</p>
+            <div class="chips"><span>Python</span><span>Raspberry Pi</span><span>Computer vision</span><span>Software architecture</span></div>
+          </article>
+          <article class="person" data-reveal style="--d:.08s">
+            <div class="avatar avatar--cyan">PW</div>
+            <div><span class="role">Co-founder · Lead Build Engineer</span><h3>Philipp Wirth</h3></div>
+            <p>Leads the physical build of the TraceUnit, covering mechanical design, CAD and turning designs into working hardware.</p>
+            <div class="chips"><span>CAD</span><span>Mechanical design</span><span>Prototyping</span><span>Hardware build</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--line">
+      <div class="container split">
+        <div data-reveal><p class="eyebrow">Location</p><h2>Lörrach, Germany.</h2></div>
+        <dl class="contact-list" data-reveal style="--d:.1s">
+          <div><dt>Based in</dt><dd>Lörrach, Baden-Württemberg, Germany</dd></div>
+          <div><dt>Region</dt><dd>Where Germany, Switzerland and France meet</dd></div>
+          <div><dt>Contact</dt><dd><a href="mailto:info@barconasystems.de">info@barconasystems.de</a></dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta-band" data-reveal>
+          <p class="eyebrow">Work with us</p>
+          <h2>Partner, mentor or investor?</h2>
+          <p>We're always happy to talk to people who can help the TraceUnit get onto real warehouse floors faster.</p>
+          <a class="btn btn-primary" href="contact.html">Get in touch <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div data-include="footer"></div>
+  <script src="src/js/layout.js"></script>
+  <script src="src/js/main.js" defer></script>
+</body>
+</html>

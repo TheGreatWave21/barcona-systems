@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact | Barcona Systems</title>
+  <meta name="description" content="Contact Barcona Systems in Lörrach, Germany. We reply within two working days.">
+  <meta name="theme-color" content="#0a0b0d">
+  <link rel="icon" href="public/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="src/css/tokens.css">
+  <link rel="stylesheet" href="src/css/base.css">
+  <link rel="stylesheet" href="src/css/components.css">
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <p class="crumbs"><a href="index.html">Home</a> / Contact</p>
+        <p class="eyebrow">Contact</p>
+        <h1>Let's talk.</h1>
+        <p class="lead">Questions about the TraceUnit, a pilot, a partnership or the press: we read every message and reply within two working days.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container split">
+        <dl class="contact-list" data-reveal>
+          <div><dt>Email</dt><dd><a href="mailto:info@barconasystems.de">info@barconasystems.de</a></dd></div>
+          <div><dt>Location</dt><dd>Lörrach, Baden-Württemberg, Germany</dd></div>
+          <div><dt>Response time</dt><dd>Within two working days</dd></div>
+          <div><dt>Languages</dt><dd>English · Deutsch</dd></div>
+        </dl>
+        <form class="panel form" data-mailto="info@barconasystems.de" data-subject="Website enquiry" data-reveal style="--d:.1s">
+          <div class="form-row">
+            <div class="field"><label for="c-name">Name</label><input id="c-name" name="Name" required autocomplete="name"></div>
+            <div class="field"><label for="c-email">Email</label><input id="c-email" name="Email" type="email" required autocomplete="email"></div>
+          </div>
+          <div class="form-row">
+            <div class="field"><label for="c-company">Company (optional)</label><input id="c-company" name="Company" autocomplete="organization"></div>
+            <div class="field">
+              <label for="c-topic">Topic</label>
+              <select id="c-topic" name="Topic"><option>General question</option><option>Pilot program</option><option>Partnership</option><option>Press</option><option>Other</option></select>
+            </div>
+          </div>
+          <div class="field"><label for="c-msg">Message</label><textarea id="c-msg" name="Message" required></textarea></div>
+          <label class="check"><input type="checkbox" name="consent" required> I agree that my details are used to respond to my enquiry. See the <a href="datenschutz.html">privacy policy</a>.</label>
+          <div><button class="btn btn-primary" type="submit">Send message <span class="arrow">→</span></button></div>
+          <p class="form-status" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <div data-include="footer"></div>
+  <script src="src/js/layout.js"></script>
+  <script src="src/js/main.js" defer></script>
+</body>
+</html>
