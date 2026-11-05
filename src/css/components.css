@@ -460,8 +460,8 @@
 .dd-table tbody tr:nth-child(odd) td { background: #dce6f1; }
 .dd-table tbody tr { opacity: 0.12; transition: opacity 0.35s; transition-delay: calc(var(--i) * 0.28s); }
 .dd.is-rows .dd-table tbody tr { opacity: 1; }
-.dd-table .st-readable { color: #127a3a; font-weight: 600; }
-.dd-table .st-unreadable { color: #c62828; font-weight: 600; }
+.dd-table .st-read { color: #127a3a; font-weight: 600; }
+.dd-table .st-check { color: #c62828; font-weight: 600; }
 .dd-table .st-not_attempted { color: #6b7078; }
 .dd-excel { overflow-x: auto; }
 .dd-caption { font-size: var(--fs-sm); color: var(--dim); margin-top: var(--s-2); }

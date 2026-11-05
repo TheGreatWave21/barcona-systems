@@ -1,8 +1,5 @@
 /* ==========================================================
-   BARCONA AI output demo.
-   A reconstruction of a real BARCONA result on a warehouse shelf:
-   detection classes, read status, relation lines to the shelf label,
-   and the Excel rows the pipeline writes. Labels and IDs are anonymised.
+   BARCONA AI result demo: simplified illustration with fictional labels and IDs.
    ========================================================== */
 (function () {
   const hosts = document.querySelectorAll('[data-include="detect"]');
@@ -30,31 +27,27 @@
 
   // Detections: [id, kind, x, y, w, h, tag, vertical]
   const D = [
-    ["TARGET_1", "ok", 204, 168, 68, 30, "R1 · READABLE"],
-    ["TARGET_2", "ok", 378, 148, 70, 30, "R1 · READABLE"],
-    ["NONTARGET_1", "nt", 543, 128, 12, 60, "TILE", true],
-    ["NONTARGET_2", "nt", 178, 230, 50, 12, "TILE"],
-    ["NONTARGET_3", "nt", 178, 250, 50, 12, "TILE"],
-    ["TARGET_3", "ok", 290, 340, 76, 30, "R1 · READABLE"],
-    ["NONTARGET_4", "nt", 484, 312, 12, 58, "TILE", true],
-    ["TARGET_4", "ok", 146, 552, 70, 28, "R1 · READABLE"],
-    ["NONTARGET_5", "nt", 318, 520, 12, 58, "TILE", true],
-    ["TARGET_5", "bad", 446, 478, 28, 72, "R1 · UNREADABLE", true],
-    ["SHELF_1", "bad", 676, 326, 30, 14, "UNREADABLE"],
-    ["SHELF_2", "ok", 360, 590, 80, 10, "SHELF · READABLE"],
+    ["TARGET_1", "ok", 204, 168, 68, 30, "READ"],
+    ["TARGET_2", "ok", 378, 148, 70, 30, "READ"],
+    ["X1", "nt", 543, 128, 12, 60, "", true],
+    ["X2", "nt", 178, 230, 50, 12, ""],
+    ["X3", "nt", 178, 250, 50, 12, ""],
+    ["TARGET_3", "ok", 290, 340, 76, 30, "READ"],
+    ["X4", "nt", 484, 312, 12, 58, "", true],
+    ["TARGET_4", "ok", 146, 552, 70, 28, "READ"],
+    ["X5", "nt", 318, 520, 12, 58, "", true],
+    ["TARGET_5", "bad", 446, 478, 28, 72, "CHECK", true],
+    ["X6", "bad", 676, 326, 30, 14, "CHECK"],
+    ["SHELF_2", "ok", 360, 590, 80, 10, "SHELF"],
   ];
 
   // Excel rows the pipeline writes (same columns as the real output)
   const ROWS = [
-    ["TARGET_1", "40004218360", "CODE_128", "READABLE"],
-    ["TARGET_2", "40004218377", "CODE_128", "READABLE"],
-    ["NONTARGET_1", "", "", "NOT_ATTEMPTED"],
-    ["NONTARGET_2", "", "", "NOT_ATTEMPTED"],
-    ["TARGET_3", "40004295512", "CODE_128", "READABLE"],
-    ["TARGET_4", "40004295529", "CODE_128", "READABLE"],
-    ["TARGET_5", "", "", "UNREADABLE"],
-    ["SHELF_1", "", "", "UNREADABLE"],
-    ["SHELF_2", "A04-02", "CODE_128", "READABLE"],
+    ["Package 1", "40004218360", "A04-02", "READ"],
+    ["Package 2", "40004218377", "A04-02", "READ"],
+    ["Package 3", "40004295512", "A04-02", "READ"],
+    ["Package 4", "40004295529", "A04-02", "READ"],
+    ["Package 5", "", "A04-02", "CHECK"],
   ];
 
   const COLORS = { ok: "#3ddc84", nt: "#a7abb1", bad: "#ff4d4d" };
@@ -64,12 +57,12 @@
     const card = "#8c6c48", white = "#cfcfcc";
     const dets = D.map(([id, kind, x, y, w, h, tag], i) => {
       const c = COLORS[kind];
-      const tw = Math.max(w, (id.length + tag.length + 1) * 5.6 + 8);
+      const tw = Math.max(w, tag.length * 5.6 + 8);
       const ty = y - 13 < 2 ? y + h + 2 : y - 13;
       return `<g class="dd-det" style="--i:${i}">
         <rect x="${x - 3}" y="${y - 3}" width="${w + 6}" height="${h + 6}" fill="none" stroke="${c}" stroke-width="2"/>
-        <rect x="${x - 3}" y="${ty}" width="${tw}" height="12" fill="${c}"/>
-        <text x="${x}" y="${ty + 9}" font-family="IBM Plex Mono, monospace" font-size="8.5" font-weight="600" fill="#0a0b0d">${id} ${tag}</text>
+        <rect x="${x - 3}" y="${ty}" width="${tag ? tw : 0}" height="12" fill="${c}"/>
+        <text x="${x}" y="${ty + 9}" font-family="IBM Plex Mono, monospace" font-size="8.5" font-weight="600" fill="#0a0b0d">${tag}</text>
       </g>`;
     }).join("");
     const tgt = D.filter((d) => d[0].startsWith("TARGET"));
@@ -82,7 +75,7 @@
     }).join("");
 
     return `
-    <svg class="dd-svg" viewBox="0 0 800 600" role="img" aria-label="Reconstruction of a BARCONA AI result: packages on a warehouse shelf with detected barcodes, read status and relation lines to the shelf label">
+    <svg class="dd-svg" viewBox="0 0 800 600" role="img" aria-label="Simplified illustration of a BARCONA AI result: packages on a warehouse shelf with read barcodes linked to the shelf">
       <rect width="800" height="600" fill="#1b1a17"/>
       <!-- back of rack -->
       <rect x="580" y="40" width="110" height="560" fill="#24231f"/>
@@ -121,7 +114,7 @@
   }
 
   function table() {
-    return `<table class="dd-table"><thead><tr><th>Object</th><th>Barcode_Value</th><th>Barcode_Format</th><th>Read_Status</th></tr></thead><tbody>${ROWS.map(
+    return `<table class="dd-table"><thead><tr><th>Item</th><th>Barcode</th><th>Location</th><th>Status</th></tr></thead><tbody>${ROWS.map(
       (r, i) => `<tr style="--i:${i}"><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td class="st-${r[3].toLowerCase()}">${r[3]}</td></tr>`
     ).join("")}</tbody></table>`;
   }
@@ -132,15 +125,15 @@
     el.innerHTML = `
       <div class="dd-stage">
         <span class="hud-label hud-label--tl"><span class="rec"></span>BARCONA AI · Output</span>
-        <span class="hud-label hud-label--tr dd-phase" aria-live="off">Input image</span>
+        <span class="hud-label hud-label--tr dd-phase" aria-live="off">Scanning</span>
         ${svg()}
       </div>
       <div class="dd-side">
         <div class="dd-legend">
-          <span><i style="background:${COLORS.ok}"></i>Target · read</span>
-          <span><i style="background:${COLORS.nt}"></i>Non-target · ignored</span>
-          <span><i style="background:${COLORS.bad}"></i>Unreadable · stays visible</span>
-          <span><i style="background:#4fb3ff"></i>Relation to shelf</span>
+          <span><i style="background:${COLORS.ok}"></i>Read</span>
+          <span><i style="background:${COLORS.nt}"></i>Not relevant</span>
+          <span><i style="background:${COLORS.bad}"></i>Needs a check</span>
+          <span><i style="background:#4fb3ff"></i>Linked to shelf</span>
         </div>
         <div class="dd-excel"><div class="dd-excel-head">results.xlsx</div>${table()}</div>
       </div>`;
@@ -148,10 +141,10 @@
 
     const phase = el.querySelector(".dd-phase");
     const steps = [
-      ["is-sweep", "01 · Detect", 0],
-      ["is-det", "01 · Detect", 1300],
-      ["is-rel", "03 · Assign", 4200],
-      ["is-rows", "04 · Check → Excel", 6000],
+      ["is-sweep", "Scanning", 0],
+      ["is-det", "Scanning", 1300],
+      ["is-rel", "Linking to shelf", 4200],
+      ["is-rows", "Result", 6000],
     ];
     let timers = [];
     function play() {

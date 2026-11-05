@@ -1,10 +1,5 @@
 /* ==========================================================
-   Live floor-map demo.
-   Runs the real "Basic Barcona Warehouse" scenario from the Barcona
-   simulator (BarconaSystemssimulations/scenarios/basic_warehouse.json)
-   with the same scan rules as the simulation engine:
-     - range 3.0 m, half-angle 25° off heading, line of sight required
-     - progress +40 %/s while visible, decays at half rate otherwise
+   Simulation demo: a simplified example mission (illustrative only).
    ========================================================== */
 (function () {
   const canvas = document.getElementById("floor-map");
@@ -12,7 +7,7 @@
   const ctx = canvas.getContext("2d");
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---- Scenario: basic_warehouse.json ---- */
+  /* ---- Example hall ---- */
   const WORLD = { w: 18.0, h: 11.0 };
   const START = { x: 1.3, y: 1.2, a: 0 };
   const GOAL = { x: 16.2, y: 9.4 };
@@ -32,8 +27,8 @@
     { id: "BC-GOAL-001", x: 16.0, y: 8.8 },
   ];
 
-  /* ---- Engine constants (engine.py) ---- */
-  const SCAN_RANGE = 3.0, SCAN_HALF = (25 * Math.PI) / 180, SCAN_RATE = 40;
+  /* ---- Demo scan parameters (illustrative) ---- */
+  const SCAN_RANGE = 3.2, SCAN_HALF = (30 * Math.PI) / 180, SCAN_RATE = 50;
   const SPEED = 1.3, TURN = Math.PI * 0.9;
 
   /* ---- Mission: drive the aisle, stop at each barcode, then the goal ---- */
@@ -162,7 +157,7 @@
     ctx.strokeStyle = "rgba(255,91,31,.35)"; ctx.lineWidth = 2; ctx.setLineDash([2, 5]);
     ctx.beginPath(); trail.forEach(([x, y], i) => (i ? ctx.lineTo(X(x), Y(y)) : ctx.moveTo(X(x), Y(y)))); ctx.stroke(); ctx.setLineDash([]);
 
-    // scan cone (3 m, ±25°)
+    // scan cone
     const g = ctx.createRadialGradient(X(bot.x), Y(bot.y), 0, X(bot.x), Y(bot.y), SCAN_RANGE * S);
     g.addColorStop(0, "rgba(127,227,255,.22)"); g.addColorStop(1, "rgba(127,227,255,.02)");
     ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(X(bot.x), Y(bot.y));

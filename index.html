@@ -54,8 +54,8 @@
 
     <div class="marquee" aria-hidden="true">
       <div class="marquee-track">
-        <span>Detect</span><span>Read</span><span>Assign</span><span>Check</span><span>Multi-frame tracking</span><span>Forklift-mounted</span><span>Autonomous scanning</span><span>Excel output</span>
-        <span>Detect</span><span>Read</span><span>Assign</span><span>Check</span><span>Multi-frame tracking</span><span>Forklift-mounted</span><span>Autonomous scanning</span><span>Excel output</span>
+        <span>Detect</span><span>Read</span><span>Assign</span><span>Check</span><span>Live inventory data</span><span>Forklift-mounted</span><span>Autonomous scanning</span><span>Excel output</span>
+        <span>Detect</span><span>Read</span><span>Assign</span><span>Check</span><span>Live inventory data</span><span>Forklift-mounted</span><span>Autonomous scanning</span><span>Excel output</span>
       </div>
     </div>
 
@@ -104,14 +104,8 @@
         </div>
         <div data-reveal style="margin-bottom:var(--s-5)">
           <div data-include="detect"></div>
-          <p class="dd-caption">Reconstruction of a real BARCONA AI result on a warehouse shelf. Labels, brands and IDs are anonymised; detection classes, statuses and Excel columns match the pipeline output.</p>
+          <p class="dd-caption">Simplified illustration of a BARCONA AI result. Labels and IDs are fictional.</p>
         </div>
-        <ol class="process">
-          <li data-reveal><h3>Detect</h3><p>Handling-unit and shelf barcodes, plus shelf-level markings.</p></li>
-          <li data-reveal style="--d:.06s"><h3>Read</h3><p>Locate, prepare and decode each barcode, tracked across video frames.</p></li>
-          <li data-reveal style="--d:.12s"><h3>Assign</h3><p>Link every handling unit to its shelf location.</p></li>
-          <li data-reveal style="--d:.18s"><h3>Check</h3><p>Flag <span class="mono accent" style="white-space:nowrap">NO READ</span>, <span class="mono accent">REVIEW</span> and conflicts, so nothing is guessed.</p></li>
-        </ol>
         <p style="margin-top:2rem" data-reveal><a class="link-arrow" href="barcona-ai.html">How BARCONA AI works <span>→</span></a></p>
       </div>
     </section>
@@ -205,16 +199,16 @@
       <div class="container">
         <div class="section-head">
           <div data-reveal>
-            <p class="eyebrow">From our simulator</p>
+            <p class="eyebrow">Simulation</p>
             <h2>Watch a scan mission.</h2>
           </div>
-          <p class="lead" data-reveal style="--d:.1s">This is the "Basic Barcona Warehouse" scenario from the simulator we use to test navigation and scanning before real hardware: same layout, same barcode IDs, same scan rules.</p>
+          <p class="lead" data-reveal style="--d:.1s">We test navigation and scanning in simulation before anything runs on real hardware. Here's a simplified example mission.</p>
         </div>
         <div class="map-wrap" data-reveal>
           <div class="map-stage">
-            <span class="hud-label hud-label--tl"><span class="rec"></span>basic_warehouse.json · 18 × 11 m</span>
-            <span class="hud-label hud-label--br">Scan rule: ≤ 3 m · ±25° · line of sight · 40 %/s</span>
-            <canvas id="floor-map" aria-label="Barcona simulator: a robot drives a warehouse aisle and scans five barcodes using a 3 metre, 50 degree scan cone" role="img"></canvas>
+            <span class="hud-label hud-label--tl"><span class="rec"></span>Simulation · example hall</span>
+            <span class="hud-label hud-label--br">Simplified demo</span>
+            <canvas id="floor-map" aria-label="Simulation: a robot drives a warehouse aisle and scans five barcodes" role="img"></canvas>
           </div>
           <dl class="map-side">
             <div class="readout"><dt>Barcodes scanned</dt><dd class="cyan" data-map="scanned">0/5</dd></div>
@@ -262,7 +256,7 @@
           <li class="done" data-reveal><time>Aug 2025</time><h3>First CAD design</h3><p>The TraceUnit concept took shape as a full 3D model, covering chassis, sensor mast and drive.</p></li>
           <li class="done" data-reveal><time>Sep 2025</time><h3>Core software architecture</h3><p>The foundation for sensor input, data processing and mapping was laid out.</p></li>
           <li class="done" data-reveal><time>Jan 2026</time><h3>New collaboration</h3><p>An external partner joined to support the next phase of development.</p></li>
-          <li class="done" data-reveal><time>2026</time><h3>BARCONA AI software core</h3><p>The TraceUnit idea grew into a full software core: our own dataset and trained models, video tracking, assignment logic, Excel output, tests and documentation.</p></li>
+          <li class="done" data-reveal><time>2026</time><h3>BARCONA AI software core</h3><p>The TraceUnit idea grew into a full software core that turns warehouse images into inventory data.</p></li>
           <li class="next" data-reveal><time>Next</time><h3>Detection Unit test setup &amp; pilots</h3><p>A first forklift-mounted test setup, followed by pilots in real warehouse conditions.</p></li>
         </ol>
       </div>
