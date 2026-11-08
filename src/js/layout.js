@@ -30,7 +30,6 @@
     ["barcona-ai.html", "BARCONA AI"],
     ["detection-unit.html", "Detection Unit"],
     ["traceunit.html", "TraceUnit"],
-    ["pilot.html", "Pilot"],
     ["about.html", "About"],
     ["news.html", "News"],
     ["contact.html", "Contact"],
@@ -47,9 +46,9 @@
         <a class="brand" href="index.html" aria-label="Barcona Systems, home">${LOGO}<span>BARCONA<b>Systems</b></span></a>
         <nav class="nav" id="site-nav" aria-label="Main">
           ${NAV.map(([href, label]) => `<a href="${href}"${norm(href) === page && !href.includes("#") ? ' aria-current="page"' : ""}>${label}</a>`).join("")}
-          <a class="btn btn-primary nav-cta-mobile" href="pilot.html">Become a pilot partner <span class="arrow">→</span></a>
+          <a class="btn btn-primary nav-cta-mobile" href="contact.html">Get in touch <span class="arrow">→</span></a>
         </nav>
-        <a class="btn btn-primary btn-sm header-cta" href="pilot.html">Become a pilot partner <span class="arrow">→</span></a>
+        <a class="btn btn-primary btn-sm header-cta" href="contact.html">Get in touch <span class="arrow">→</span></a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
       </div>
     </header>`;
@@ -70,7 +69,6 @@
               <li><a href="detection-unit.html">Detection Unit</a></li>
               <li><a href="traceunit.html">TraceUnit-1-30x</a></li>
               <li><a href="index.html#demo">Live map demo</a></li>
-              <li><a href="pilot.html">Pilot program</a></li>
             </ul>
           </div>
           <div>

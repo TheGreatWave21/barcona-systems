@@ -11,7 +11,6 @@ A static rebuild of barconasystems.de. It uses plain HTML, CSS and JavaScript, w
 | `barcona-ai.html` | Software core: architecture, 4 steps, multi-frame tracking, status flags, output, ready/next |
 | `detection-unit.html` | Forklift-mounted unit: concept, operation, benefit, comparison with TraceUnit, FAQ |
 | `traceunit.html` | Autonomous robot: capabilities, scan cycle, spec sheet, FAQ |
-| `pilot.html` | Pilot program: benefits, process, application form |
 | `about.html` | Story, values, team, location |
 | `news.html` | Build log / news posts |
 | `contact.html` | Contact details + form |

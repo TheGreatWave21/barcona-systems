@@ -32,19 +32,41 @@
         <!-- To add a post: copy one <article class="post"> block, newest first. -->
         <div class="posts">
           <article class="post" id="software-core" data-reveal>
-            <div><time datetime="2026">2026</time><p style="margin-top:.6rem"><span class="badge badge--accent">Product</span></p></div>
+            <div><time datetime="2026-11">Nov 2026</time><p style="margin-top:.6rem"><span class="badge badge--accent">Product</span></p></div>
             <div>
               <h2>From the TraceUnit idea to a software core, and a new Detection Unit</h2>
               <p>What started as a robot concept with early image recognition has grown into BARCONA AI, a software core that turns warehouse images and video into inventory data.</p>
               <p>With the core in place, we're introducing a second way to deploy it. The <a href="detection-unit.html" style="text-decoration:underline">Detection Unit</a> mounts a camera and compute module on existing forklifts, so inventory is captured during normal operations. A first test setup is in preparation.</p>
             </div>
           </article>
-          <article class="post" id="new-collaboration" data-reveal>
-            <div><time datetime="2026-01-21">21 Jan 2026</time><p style="margin-top:.6rem"><span class="badge badge--accent">Partnership</span></p></div>
+          <article class="post" id="own-model" data-reveal>
+            <div><time datetime="2026-07">Jul 2026</time><p style="margin-top:.6rem"><span class="badge badge--cyan">Engineering</span></p></div>
             <div>
-              <h2>New collaboration at Barcona Systems</h2>
-              <p>We've started working with an external partner who will support the next phase of TraceUnit development. It's an important step from building on our own towards testing under real-world conditions.</p>
-              <p>We'll share more details as the collaboration takes shape.</p>
+              <h2>Our own detection model</h2>
+              <p>We've trained a recognition model on images from our own test setups instead of relying on generic models. It's noticeably better at finding barcodes on real warehouse labels, even at an angle or in poor light.</p>
+            </div>
+          </article>
+          <article class="post" id="simulation" data-reveal>
+            <div><time datetime="2026-05">May 2026</time><p style="margin-top:.6rem"><span class="badge badge--cyan">Engineering</span></p></div>
+            <div>
+              <h2>Testing in simulation first</h2>
+              <p>We built a simulated warehouse hall to test how the robot drives, where it stops and how it scans each rack. Changes can now be tried in minutes before they go anywhere near hardware.</p>
+              <p>You can watch a simplified version of a scan mission <a href="index.html#demo" style="text-decoration:underline">on our homepage</a>.</p>
+            </div>
+          </article>
+          <article class="post" id="camera-testing" data-reveal>
+            <div><time datetime="2026-04">Apr 2026</time><p style="margin-top:.6rem"><span class="badge badge--cyan">Engineering</span></p></div>
+            <div>
+              <h2>Camera testing</h2>
+              <p>At the beginning of April we started testing the full camera chain end to end: finding a barcode, moving the camera onto it and reading it reliably.</p>
+              <p>Later in the month we added an up-and-down routine: the camera moves along the rack level by level and only keeps the sharpest frames. That's the scan pattern the TraceUnit will use in the aisle.</p>
+            </div>
+          </article>
+          <article class="post" id="first-camera" data-reveal>
+            <div><time datetime="2026-02">Feb 2026</time><p style="margin-top:.6rem"><span class="badge badge--cyan">Engineering</span></p></div>
+            <div>
+              <h2>First camera experiments</h2>
+              <p>The first camera setup is running. It picks out barcodes in live images, and since March it can also pan, tilt and zoom towards what it finds on its own.</p>
             </div>
           </article>
           <article class="post" id="where-we-stand" data-reveal>

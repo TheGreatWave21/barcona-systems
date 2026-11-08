@@ -33,7 +33,7 @@
           </h1>
           <p class="lead">BARCONA AI detects, reads and assigns every barcode in your warehouse, and flags what doesn't add up. It runs on a camera mounted to the forklifts you already have, or on an autonomous robot.</p>
           <div class="btn-row">
-            <a class="btn btn-primary" href="pilot.html">Become a pilot partner <span class="arrow">→</span></a>
+            <a class="btn btn-primary" href="contact.html">Get in touch <span class="arrow">→</span></a>
             <a class="btn btn-ghost" href="#deploy">See the products</a>
           </div>
           <div class="hero-meta">
@@ -202,24 +202,25 @@
             <p class="eyebrow">Simulation</p>
             <h2>Watch a scan mission.</h2>
           </div>
-          <p class="lead" data-reveal style="--d:.1s">We test navigation and scanning in simulation before anything runs on real hardware. Here's a simplified example mission.</p>
+          <p class="lead" data-reveal style="--d:.1s">We test navigation and scanning in simulation before anything runs on real hardware. Here's a simplified example mission: the robot stops at each rack and moves its camera up and down to read every shelf level.</p>
         </div>
         <div class="map-wrap" data-reveal>
           <div class="map-stage">
             <span class="hud-label hud-label--tl"><span class="rec"></span>Simulation · example hall</span>
             <span class="hud-label hud-label--br">Simplified demo</span>
-            <canvas id="floor-map" aria-label="Simulation: a robot drives a warehouse aisle and scans five barcodes" role="img"></canvas>
+            <canvas id="floor-map" aria-label="Simulation: a robot drives a warehouse aisle, stops at each rack and moves its camera up and down to read the barcodes on every shelf level" role="img"></canvas>
           </div>
           <dl class="map-side">
-            <div class="readout"><dt>Barcodes scanned</dt><dd class="cyan" data-map="scanned">0/5</dd></div>
+            <div class="readout"><dt>Barcodes scanned</dt><dd class="cyan" data-map="scanned">0/12</dd></div>
             <div class="readout"><dt>Mission time</dt><dd data-map="elapsed">0.0 s</dd></div>
             <div class="readout"><dt>State</dt><dd class="orange" data-map="state" style="font-size:1.4rem">Driving</dd></div>
             <div class="scan-log"><h4>Scan log</h4><ol data-map="log"></ol></div>
             <div class="legend">
+              <span><i style="background:#6ee7a8"></i>LiDAR: 360° distance scan</span>
+              <span><i style="background:#7fe3ff;opacity:.6"></i>Camera: field of view</span>
               <span><i style="background:#5f656e"></i>Not scanned</span>
-              <span><i style="background:#ffc43d"></i>Scan in progress</span>
+              <span><i style="background:#ffc43d"></i>Reading</span>
               <span><i style="background:#7fe3ff"></i>Scanned</span>
-              <span><i style="background:#ff5b1f"></i>Line of sight blocked</span>
             </div>
           </dl>
         </div>
@@ -255,9 +256,13 @@
         <ol class="timeline">
           <li class="done" data-reveal><time>Aug 2025</time><h3>First CAD design</h3><p>The TraceUnit concept took shape as a full 3D model, covering chassis, sensor mast and drive.</p></li>
           <li class="done" data-reveal><time>Sep 2025</time><h3>Core software architecture</h3><p>The foundation for sensor input, data processing and mapping was laid out.</p></li>
-          <li class="done" data-reveal><time>Jan 2026</time><h3>New collaboration</h3><p>An external partner joined to support the next phase of development.</p></li>
-          <li class="done" data-reveal><time>2026</time><h3>BARCONA AI software core</h3><p>The TraceUnit idea grew into a full software core that turns warehouse images into inventory data.</p></li>
-          <li class="next" data-reveal><time>Next</time><h3>Detection Unit test setup &amp; pilots</h3><p>A first forklift-mounted test setup, followed by pilots in real warehouse conditions.</p></li>
+          <li class="done" data-reveal><time>Feb 2026</time><h3>First recognition experiments</h3><p>A first camera setup started picking out barcodes in live images.</p></li>
+          <li class="done" data-reveal><time>Mar 2026</time><h3>Motorised camera control</h3><p>The camera learned to pan, tilt and zoom on its own towards what it detects.</p></li>
+          <li class="done" data-reveal><time>Apr 2026</time><h3>Camera testing</h3><p>From early April we tested the camera chain end to end, then added an up-and-down scan that reads rack levels one by one.</p></li>
+          <li class="done" data-reveal><time>May 2026</time><h3>Warehouse simulation</h3><p>A simulated hall lets us test navigation and scan routines before they run on hardware.</p></li>
+          <li class="done" data-reveal><time>Jul 2026</time><h3>Our own detection model</h3><p>We trained a recognition model on our own warehouse images.</p></li>
+          <li class="done" data-reveal><time>Nov 2026</time><h3>BARCONA AI software core</h3><p>The TraceUnit work grew into a software core that turns warehouse images into inventory data.</p></li>
+          <li class="next" data-reveal><time>Next</time><h3>Detection Unit test setup</h3><p>A first forklift-mounted test setup, followed by tests in real warehouse conditions.</p></li>
         </ol>
       </div>
     </section>
@@ -295,12 +300,11 @@
     <section class="section">
       <div class="container">
         <div class="cta-band" data-reveal>
-          <p class="eyebrow">Pilot program</p>
+          <p class="eyebrow">Work with us</p>
           <h2>Help us put BARCONA on a real floor.</h2>
           <p>We're looking for warehouses and logistics teams who want early access, direct influence on the product and a close working relationship with the people building it.</p>
           <div class="btn-row">
-            <a class="btn btn-primary" href="pilot.html">Become a pilot partner <span class="arrow">→</span></a>
-            <a class="btn btn-ghost" href="contact.html">Ask us anything</a>
+            <a class="btn btn-primary" href="contact.html">Get in touch <span class="arrow">→</span></a>
           </div>
         </div>
       </div>

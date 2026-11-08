@@ -26,6 +26,9 @@
   const label = (x, y, w, h) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="2" fill="#e8e7e3"/><rect x="${x + 8}" y="${y + 9}" width="26" height="6" rx="1" fill="#3b3d41"/>${lines(x + 8, y + 24, 5, w * 0.32)}${lines(x + w * 0.52, y + 12, 4, w * 0.3)}`;
 
   // Detections: [id, kind, x, y, w, h, tag, vertical]
+  // Every barcode in the scene is detected; only the five TARGETs are packages
+  // that get read. Text and numbers on labels are never boxed: the system
+  // reads the barcode, not the printed digits.
   const D = [
     ["TARGET_1", "ok", 204, 168, 68, 30, "READ"],
     ["TARGET_2", "ok", 378, 148, 70, 30, "READ"],
@@ -34,11 +37,11 @@
     ["X3", "nt", 178, 250, 50, 12, ""],
     ["TARGET_3", "ok", 290, 340, 76, 30, "READ"],
     ["X4", "nt", 484, 312, 12, 58, "", true],
+    ["X7", "nt", 2, 468, 14, 64, "", true],
     ["TARGET_4", "ok", 146, 552, 70, 28, "READ"],
     ["X5", "nt", 318, 520, 12, 58, "", true],
     ["TARGET_5", "bad", 446, 478, 28, 72, "CHECK", true],
-    ["X6", "bad", 676, 326, 30, 14, "CHECK"],
-    ["SHELF_2", "ok", 360, 590, 80, 10, "SHELF"],
+    ["SHELF_2", "shelf", 336, 638, 128, 24, "SHELF"],
   ];
 
   // Excel rows the pipeline writes (same columns as the real output)
@@ -50,7 +53,7 @@
     ["Package 5", "", "A04-02", "CHECK"],
   ];
 
-  const COLORS = { ok: "#3ddc84", nt: "#a7abb1", bad: "#ff4d4d" };
+  const COLORS = { ok: "#3ddc84", nt: "#59606b", bad: "#ff4d4d", shelf: "#4fb3ff" };
 
   function svg() {
     const box = (x, y, w, h, fill) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="3" fill="${fill}" stroke="rgba(0,0,0,.35)"/>`;
@@ -58,16 +61,17 @@
     const dets = D.map(([id, kind, x, y, w, h, tag], i) => {
       const c = COLORS[kind];
       const tw = Math.max(w, tag.length * 5.6 + 8);
-      const ty = y - 13 < 2 ? y + h + 2 : y - 13;
+      // Shelf tag goes below the barcode so it doesn't cover the location text
+      const ty = kind === "shelf" || y - 13 < 2 ? y + h + 4 : y - 13;
       return `<g class="dd-det" style="--i:${i}">
-        <rect x="${x - 3}" y="${y - 3}" width="${w + 6}" height="${h + 6}" fill="none" stroke="${c}" stroke-width="2"/>
+        <rect x="${x - 3}" y="${y - 3}" width="${w + 6}" height="${h + 6}" fill="none" stroke="${c}" stroke-width="2"${kind === "nt" ? ' stroke-dasharray="4 2.5"' : ""}/>
         <rect x="${x - 3}" y="${ty}" width="${tag ? tw : 0}" height="12" fill="${c}"/>
         <text x="${x}" y="${ty + 9}" font-family="IBM Plex Mono, monospace" font-size="8.5" font-weight="600" fill="#0a0b0d">${tag}</text>
       </g>`;
     }).join("");
     const tgt = D.filter((d) => d[0].startsWith("TARGET"));
     const shelf = D.find((d) => d[0] === "SHELF_2");
-    const sx = shelf[2] + shelf[4] / 2, sy = shelf[3] + 4;
+    const sx = shelf[2] + shelf[4] / 2, sy = 604; // top edge of the shelf label
     const rels = tgt.map(([, , x, y, w, h], i) => {
       const cx = x + w / 2, cy = y + h / 2;
       const len = Math.hypot(sx - cx, sy - cy);
@@ -75,10 +79,10 @@
     }).join("");
 
     return `
-    <svg class="dd-svg" viewBox="0 0 800 600" role="img" aria-label="Simplified illustration of a BARCONA AI result: packages on a warehouse shelf with read barcodes linked to the shelf">
-      <rect width="800" height="600" fill="#1b1a17"/>
+    <svg class="dd-svg" viewBox="0 0 800 680" role="img" aria-label="Simplified illustration of a BARCONA AI result: packages on a warehouse shelf with read barcodes linked to the shelf">
+      <rect width="800" height="680" fill="#1b1a17"/>
       <!-- back of rack -->
-      <rect x="580" y="40" width="110" height="560" fill="#24231f"/>
+      <rect x="580" y="40" width="110" height="640" fill="#24231f"/>
       <g fill="#2e2d29">${Array.from({ length: 8 }, (_, i) => `<rect x="592" y="${60 + i * 16}" width="90" height="2"/>`).join("")}</g>
       <rect x="586" y="300" width="100" height="70" fill="#2b2a26"/>
       <rect x="586" y="410" width="100" height="10" fill="#c4501d"/><rect x="586" y="455" width="100" height="10" fill="#c4501d"/>
@@ -86,11 +90,9 @@
       <rect x="0" y="0" width="720" height="26" fill="#d9561d"/>
       <rect x="580" y="318" width="120" height="26" fill="#d9561d"/>
       <rect x="676" y="326" width="30" height="14" rx="1" fill="#e8e7e3"/><text x="691" y="337" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" fill="#333">402</text>
-      <rect x="0" y="588" width="800" height="12" fill="#d9561d"/>
-      <rect x="360" y="590" width="80" height="10" fill="#e8e7e3"/>${bars(372, 591, 56, 8, 11)}
-      <polygon points="700,0 745,0 745,600 700,600" fill="#24448c"/>
+      <polygon points="700,0 745,0 745,680 700,680" fill="#24448c"/>
       <polygon points="640,170 700,100 700,140 600,600 580,600" fill="#1d3a7a"/>
-      <g fill="#0e1a36">${Array.from({ length: 12 }, (_, i) => `<rect x="716" y="${30 + i * 48}" width="10" height="20" rx="3"/>`).join("")}</g>
+      <g fill="#0e1a36">${Array.from({ length: 14 }, (_, i) => `<rect x="716" y="${30 + i * 48}" width="10" height="20" rx="3"/>`).join("")}</g>
       <!-- boxes -->
       ${box(0, 262, 166, 152, card)}${box(0, 414, 112, 186, card)}
       ${box(186, 28, 150, 182, white)}${box(345, 28, 240, 186, white)}
@@ -106,6 +108,15 @@
       ${bars(180, 232, 46, 8, 13)}${bars(180, 252, 46, 8, 17)}${bars(292, 342, 72, 26, 19)}
       ${bars(486, 314, 8, 54, 23, true)}${bars(148, 554, 66, 24, 29)}${bars(320, 522, 8, 54, 31, true)}
       ${bars(448, 480, 24, 68, 37, true)}${bars(4, 470, 10, 60, 41, true)}
+      <!-- shelf beam with location label (in front, boxes stand on it) -->
+      <rect x="0" y="600" width="745" height="80" fill="#d9561d"/>
+      <rect x="0" y="600" width="745" height="5" fill="#f07a3a"/>
+      <rect x="0" y="672" width="745" height="8" fill="#a8400f"/>
+      <rect x="0" y="596" width="745" height="4" fill="#000" opacity=".35"/>
+      <g fill="#8f3a12">${[40, 110, 560, 630].map((x) => `<rect x="${x}" y="634" width="14" height="14" rx="7"/>`).join("")}</g>
+      <rect x="322" y="606" width="156" height="62" rx="3" fill="#f2f1ec" stroke="rgba(0,0,0,.4)"/>
+      <text x="400" y="629" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="16" font-weight="700" fill="#15171a">A04-02</text>
+      ${bars(338, 640, 124, 20, 11)}
       <!-- scan sweep -->
       <rect class="dd-sweep" x="0" y="0" width="800" height="3" fill="#7fe3ff"/>
       ${rels}
