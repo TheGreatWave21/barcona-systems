@@ -165,7 +165,10 @@
 @media (min-width: 960px) { .scene { grid-template-columns: 1.1fr 1fr; gap: var(--s-7); } }
 .scene-figure { position: sticky; top: calc(var(--header-h) + 4vh); height: min(78vh, 620px); display: flex; flex-direction: column; justify-content: center; }
 @media (max-width: 959px) { .scene-figure { top: var(--header-h); height: 42vh; z-index: 2; background: linear-gradient(var(--bg) 82%, transparent); } }
-.scene-figure .hud { aspect-ratio: auto; height: 100%; }
+.scene-figure .hud { aspect-ratio: auto; height: auto; flex: 1 1 auto; min-height: 0; }
+.scene-note { margin: var(--s-2) auto 0; max-width: 60ch; text-align: center; font-size: var(--fs-sm); line-height: 1.5; color: var(--muted); }
+.scene-note b { color: var(--text); font-weight: 600; }
+@media (max-width: 959px) { .scene-note { font-size: 0.75rem; margin-top: 0.5rem; } }
 .scene-steps { padding-block: 10vh 20vh; }
 .step { min-height: 62vh; display: flex; flex-direction: column; justify-content: center; opacity: 0.28; transition: opacity 0.5s var(--ease); }
 .step.is-active { opacity: 1; }

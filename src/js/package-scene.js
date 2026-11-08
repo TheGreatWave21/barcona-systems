@@ -1,7 +1,7 @@
 /* ==========================================================
    "How it works" scene: no robot, just a package moving through
    the four steps. Each sensor looks from the angle it really uses:
-   - Scan: barcode scanner in front of the label
+   - Scan: barcode camera in front of the label
    - Recognise: camera looking down from above
    - Map: LiDAR scanning a flat plane at floor level
    - Flag: package on the wrong slot, flagged, then moved to the right one
@@ -16,7 +16,7 @@
   const C = {
     floor: "#14171c", grid: "rgba(255,255,255,.05)", rack: "#d9561d", rackDim: "#7a3a1c",
     box: ["#b08a5c", "#8c6c48", "#6f5538"], label: "#ecebe6", ink: "#15171a",
-    laser: "#ff4d4d", cam: "#7fe3ff", lidar: "#6ee7a8", bad: "#ff4d4d", ok: "#3ddc84",
+    laser: "#ffc43d", cam: "#7fe3ff", lidar: "#6ee7a8", bad: "#ff4d4d", ok: "#3ddc84",
     text: "#9a9fa7", mono: "IBM Plex Mono, monospace",
   };
 
@@ -146,8 +146,8 @@
     const o = active ? 1 : 0.3;
     return `<g opacity="${o}">${line([x, y, 0], [x, y, z - 0.15], "#3a3d42", 'stroke-width="4"')}
       ${poly([[x - 0.3, y, z - 0.15], [x + 0.3, y, z - 0.15], [x + 0.3, y, z + 0.25], [x - 0.3, y, z + 0.25]], "#2a2d33", 'stroke="#0a0b0d"')}
-      ${poly([[x - 0.18, y - 0.001, z], [x + 0.18, y - 0.001, z], [x + 0.18, y - 0.001, z + 0.1], [x - 0.18, y - 0.001, z + 0.1]], C.laser)}
-      ${(() => { const [sx, sy] = P(x, y, z); return text(sx, sy + 34, "BARCODE SCANNER", active ? C.laser : C.text, 9.5, 600, "middle"); })()}</g>`;
+      ${(() => { const [lx, ly] = P(x, y - 0.001, z + 0.05); return `<circle cx="${lx.toFixed(1)}" cy="${ly.toFixed(1)}" r="5" fill="#0a0b0d" stroke="${C.laser}" stroke-width="1.5"/><circle cx="${(lx - 1.2).toFixed(1)}" cy="${(ly - 1.2).toFixed(1)}" r="1.3" fill="#fff" opacity=".7"/>`; })()}
+      ${(() => { const [sx, sy] = P(x, y, z); return text(sx, sy + 34, "BARCODE CAMERA", active ? C.laser : C.text, 9.5, 600, "middle"); })()}</g>`;
   }
   function camera(active) {
     const [x, y, z] = CAMERA;
@@ -223,11 +223,14 @@
 
     if (key === "scan") {
       const [sx, sy, sz] = SCANNER;
-      const zz = mainLb.lz0 + 0.04 + ((Math.sin(t * 4) + 1) / 2) * (mainLb.lz1 - mainLb.lz0 - 0.08);
-      const a = P(mainLb.lx0 - 0.05, mainLb.Y1, zz), c = P(mainLb.lx1 + 0.05, mainLb.Y1, zz), s0 = P(sx, sy, sz + 0.05);
+      // camera field of view framing the whole label (a camera, not a laser)
+      const { lx0, lx1, lz0, lz1, Y1 } = mainLb, m = 0.06;
+      const s0 = P(sx, sy, sz + 0.05);
+      const q = [P(lx0 - m, Y1, lz1 + m), P(lx1 + m, Y1, lz1 + m), P(lx1 + m, Y1, lz0 - m), P(lx0 - m, Y1, lz0 - m)];
       if (pkg.x > 0) {
-        over += `<polygon points="${s0.join(",")} ${a.join(",")} ${c.join(",")}" fill="rgba(255,77,77,.28)" stroke="rgba(255,77,77,.5)"/>`;
-        over += `<line x1="${a[0]}" y1="${a[1]}" x2="${c[0]}" y2="${c[1]}" stroke="${C.laser}" stroke-width="2"/>`;
+        const pulse = reduce ? 0.25 : 0.18 + 0.1 * Math.sin(t * 3);
+        over += `<polygon points="${s0.join(",")} ${q[0].join(",")} ${q[1].join(",")} ${q[2].join(",")} ${q[3].join(",")}" fill="rgba(255,196,61,${pulse.toFixed(2)})" stroke="rgba(255,196,61,.55)"/>`;
+        over += `<polygon points="${q.map((p) => p.join(",")).join(" ")}" fill="none" stroke="${C.laser}" stroke-width="1.5"/>`;
       }
       if (settled && stepT > 1.4) { const r = screenBounds(b); over += brackets(r, C.ok, 5, 8) + tag((r.x0 + r.x1) / 2, r.y0 - 14, "ID READ ✓", C.ok); }
     }
