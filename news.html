@@ -58,30 +58,38 @@
             <div><time datetime="2026-04">Apr 2026</time><p style="margin-top:.6rem"><span class="badge badge--cyan">Engineering</span></p></div>
             <div>
               <h2>Camera testing</h2>
-              <p>At the beginning of April we started testing the full camera chain end to end: finding a barcode, moving the camera onto it and reading it reliably.</p>
+              <p>At the beginning of April we started testing the full camera chain end to end against our new datasets: finding a barcode, moving the camera onto it and reading it reliably.</p>
               <p>Later in the month we added a tilt routine: the camera stays on the robot, angles up the rack level by level and only keeps the sharpest frames. That's the scan pattern the TraceUnit will use in the aisle.</p>
             </div>
           </article>
-          <article class="post" id="first-camera" data-reveal>
+          <article class="post" id="datasets" data-reveal>
+            <div><time datetime="2026-03">Mar 2026</time><p style="margin-top:.6rem"><span class="badge badge--cyan">Engineering</span></p></div>
+            <div>
+              <h2>Datasets and a moving camera</h2>
+              <p>We've started building our own datasets from real warehouse labels: different printers, angles, distances and lighting. They're what we test and train against from now on.</p>
+              <p>The camera also learned to pan, tilt and zoom on its own towards what it detects.</p>
+            </div>
+          </article>
+          <article class="post" id="first-software" data-reveal>
             <div><time datetime="2026-02">Feb 2026</time><p style="margin-top:.6rem"><span class="badge badge--cyan">Engineering</span></p></div>
             <div>
-              <h2>First camera experiments</h2>
-              <p>The first camera setup is running. It picks out barcodes in live images, and since March it can also pan, tilt and zoom towards what it finds on its own.</p>
+              <h2>The first software is running</h2>
+              <p>The core architecture is in place: the foundation that takes in data from the camera, barcode reading and LiDAR and turns it into one consistent picture of the warehouse.</p>
+              <p>A first camera setup already picks out barcodes in live images. Next up: data, and lots of it.</p>
             </div>
           </article>
-          <article class="post" id="where-we-stand" data-reveal>
-            <div><time datetime="2026-01-30">30 Jan 2026</time><p style="margin-top:.6rem"><span class="badge badge--cyan">Engineering</span></p></div>
+          <article class="post" id="concept" data-reveal>
+            <div><time datetime="2026-01">Jan 2026</time><p style="margin-top:.6rem"><span class="badge">Design</span></p></div>
             <div>
-              <h2>Where we stand</h2>
-              <p>A progress update on the TraceUnit. Our focus has been on the core software architecture: the foundation that takes in data from the barcode scanner, camera and LiDAR and turns it into one consistent picture of the warehouse.</p>
-              <p>With that groundwork in place, the next steps are integrating the sensors on the prototype and testing the full scan cycle.</p>
+              <h2>From idea to concept</h2>
+              <p>The idea has become a concrete plan: the TraceUnit, an autonomous robot that drives the aisles, stops at each rack and reads every barcode with its camera, while LiDAR keeps track of where it is.</p>
             </div>
           </article>
-          <article class="post" id="first-cad" data-reveal>
-            <div><time datetime="2026-01-10">10 Jan 2026</time><p style="margin-top:.6rem"><span class="badge">Design</span></p></div>
+          <article class="post" id="first-idea" data-reveal>
+            <div><time datetime="2025-09">Sep 2025</time><p style="margin-top:.6rem"><span class="badge">Design</span></p></div>
             <div>
-              <h2>The TraceUnit takes shape in CAD</h2>
-              <p>The first complete 3D model of the TraceUnit-1-30x is done, covering the chassis, sensor mast and drive. It's the blueprint for the physical prototype.</p>
+              <h2>Where it started</h2>
+              <p>Stocktakes are slow, manual and out of date the day they finish. That's where Barcona started: with the question of whether a camera could do the counting instead.</p>
             </div>
           </article>
         </div>
