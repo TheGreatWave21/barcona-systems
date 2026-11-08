@@ -41,19 +41,20 @@
     ["TARGET_4", "ok", 146, 552, 70, 28, "READ"],
     ["X5", "nt", 318, 520, 12, 58, "", true],
     ["TARGET_5", "bad", 446, 478, 28, 72, "CHECK", true],
-    ["SHELF_2", "shelf", 336, 638, 128, 24, "SHELF"],
+    ["SHELF_2", "shelf", 310, 638, 130, 24, "SHELF"],
+    ["ARROW", "arrow", 458, 612, 32, 50, "ARROW ↑"],
   ];
 
   // Excel rows the pipeline writes (same columns as the real output)
   const ROWS = [
-    ["Package 1", "40004218360", "A04-02", "READ"],
-    ["Package 2", "40004218377", "A04-02", "READ"],
-    ["Package 3", "40004295512", "A04-02", "READ"],
-    ["Package 4", "40004295529", "A04-02", "READ"],
-    ["Package 5", "", "A04-02", "CHECK"],
+    ["Package 1", "40004218360", "A04-02 ↑", "READ"],
+    ["Package 2", "40004218377", "A04-02 ↑", "READ"],
+    ["Package 3", "40004295512", "A04-02 ↑", "READ"],
+    ["Package 4", "40004295529", "A04-02 ↑", "READ"],
+    ["Package 5", "", "A04-02 ↑", "CHECK"],
   ];
 
-  const COLORS = { ok: "#3ddc84", nt: "#59606b", bad: "#ff4d4d", shelf: "#4fb3ff" };
+  const COLORS = { ok: "#3ddc84", nt: "#59606b", bad: "#ff4d4d", shelf: "#4fb3ff", arrow: "#c084fc" };
 
   function svg() {
     const box = (x, y, w, h, fill) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="3" fill="${fill}" stroke="rgba(0,0,0,.35)"/>`;
@@ -114,9 +115,11 @@
       <rect x="0" y="672" width="745" height="8" fill="#a8400f"/>
       <rect x="0" y="596" width="745" height="4" fill="#000" opacity=".35"/>
       <g fill="#8f3a12">${[40, 110, 560, 630].map((x) => `<rect x="${x}" y="634" width="14" height="14" rx="7"/>`).join("")}</g>
-      <rect x="322" y="606" width="156" height="62" rx="3" fill="#f2f1ec" stroke="rgba(0,0,0,.4)"/>
-      <text x="400" y="629" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="16" font-weight="700" fill="#15171a">A04-02</text>
-      ${bars(338, 640, 124, 20, 11)}
+      <rect x="300" y="606" width="200" height="62" rx="3" fill="#f2f1ec" stroke="rgba(0,0,0,.4)"/>
+      <text x="375" y="629" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="16" font-weight="700" fill="#15171a">A04-02</text>
+      ${bars(312, 640, 126, 20, 11)}
+      <!-- arrow: shows the label belongs to the level above -->
+      <polygon points="474,614 490,632 479,632 479,660 469,660 469,632 458,632" fill="#15171a"/>
       <!-- scan sweep -->
       <rect class="dd-sweep" x="0" y="0" width="800" height="3" fill="#7fe3ff"/>
       ${rels}
@@ -145,6 +148,7 @@
           <span><i style="background:${COLORS.nt}"></i>Not relevant</span>
           <span><i style="background:${COLORS.bad}"></i>Needs a check</span>
           <span><i style="background:#4fb3ff"></i>Linked to shelf</span>
+          <span><i style="background:${COLORS.arrow}"></i>Arrow recognised</span>
         </div>
         <div class="dd-excel"><div class="dd-excel-head">results.xlsx</div>${table()}</div>
       </div>`;

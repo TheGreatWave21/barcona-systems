@@ -1,8 +1,8 @@
 /* ==========================================================
    Simulation demo: a simplified example mission (illustrative only).
    The robot drives the aisle, brakes to a stop at each rack, turns its
-   camera to the rack face and runs the camera up and down the mast,
-   reading one barcode per shelf level. LiDAR scans 360° the whole time.
+   camera to the rack face and tilts it upwards level by level, reading
+   one barcode per shelf. The camera stays on the robot; it only angles up. LiDAR scans 360° the whole time.
    ========================================================== */
 (function () {
   const canvas = document.getElementById("floor-map");
@@ -30,8 +30,10 @@
   ];
 
   /* ---- Scan stops: one rack bay per stop, one barcode per shelf level ---- */
-  const LEVELS = [0.45, 1.35, 2.25];           // barcode heights in metres
-  const MAST_MIN = 0.3, MAST_MAX = 2.6;
+  const LEVELS = [0.6, 2.3, 4.0, 5.7];        // barcode heights on a tall rack (m)
+  const BEAMS = [0.1, 1.8, 3.5, 5.2, 6.9], RACK_H = 7.0;
+  const CAM_Z = 0.55, CAM_DIST = 2.4;          // camera height on the robot, distance to rack face
+  const tiltFor = (z) => Math.atan2(z - CAM_Z, CAM_DIST);
   const STOPS = [
     { rack: "rack-a1", tag: "A1", x: 3.2, side: "up" },
     { rack: "rack-a2", tag: "A2", x: 5.6, side: "down" },
@@ -52,7 +54,7 @@
 
   /* ---- Motion parameters (illustrative) ---- */
   const SPEED = 1.3, ACC = 1.4, TURN = Math.PI * 0.8;
-  const CAM_TURN = 3.0, LIFT = 0.9, READ_RATE = 160;
+  const CAM_TURN = 3.0, TILT = 0.9, READ_RATE = 160;
   const LIDAR_RANGE = 7, LIDAR_RAYS = 120, CAM_RANGE = 1.5, CAM_HALF = (28 * Math.PI) / 180;
 
   const out = {
@@ -64,7 +66,7 @@
 
   let bot, codes, wp, t, trail, phase, phaseT, level, lidarSpin;
   function reset() {
-    bot = { ...START, v: 0, cam: 0, mast: MAST_MIN };
+    bot = { ...START, v: 0, cam: 0, tilt: 0 };
     codes = STOPS.map(() => LEVELS.map(() => ({ p: 0, done: false })));
     wp = 0; t = 0; trail = []; phase = "drive"; phaseT = 0; level = 0; lidarSpin = 0;
     if (out.log) out.log.innerHTML = "";
@@ -134,9 +136,9 @@
       bot.cam = approach(bot.cam, camSide, CAM_TURN * dt);
       if (bot.cam === camSide) phase = "lift";
     } else if (phase === "lift") {
-      const h = LEVELS[level];
-      bot.mast = approach(bot.mast, h, LIFT * dt);
-      if (bot.mast === h) {
+      const want = tiltFor(LEVELS[level]);
+      bot.tilt = approach(bot.tilt, want, TILT * dt);
+      if (bot.tilt === want) {
         const c = codes[target.stop][level];
         c.p = Math.min(100, c.p + READ_RATE * dt);
         if (c.p >= 100 && !c.done) {
@@ -145,8 +147,8 @@
         }
       }
     } else if (phase === "lower") {
-      bot.mast = approach(bot.mast, MAST_MIN, LIFT * 1.4 * dt);
-      if (bot.mast === MAST_MIN) phase = "camIn";
+      bot.tilt = approach(bot.tilt, 0, TILT * 1.4 * dt);
+      if (bot.tilt === 0) phase = "camIn";
     } else if (phase === "camIn") {
       bot.cam = approach(bot.cam, 0, CAM_TURN * dt);
       if (bot.cam === 0) { phase = "drive"; wp++; }
@@ -273,7 +275,7 @@
     tagLabel("CAMERA", cx - (Math.cos(ca) < -0.3 ? 58 : Math.cos(ca) > 0.3 ? 0 : 29), cy + (Math.sin(ca) > 0.3 ? 12 : Math.sin(ca) < -0.3 ? -2 : 4), C.cam);
   }
 
-  // Side view of the rack bay in front of the robot: shows the camera going up and down
+  // Side view of the rack bay in front of the robot: shows the camera tilting up level by level
   function drawSideView() {
     const x0 = X(0.3), y0 = Y(7.05), w = X(6.4) - x0, h = Y(10.75) - y0;
     if (w < 120) return;
@@ -284,19 +286,19 @@
     ctx.fillStyle = C.text; ctx.font = font(9.5, 600);
     ctx.fillText(`SIDE VIEW · ${stop.rack}${atStop ? "" : " (next)"}`, x0 + 8, y0 + 14);
 
-    const ground = y0 + h - 10, m = (h - 30) / 3.0; // pixels per metre
+    const ground = y0 + h - 10, m = (h - 30) / (RACK_H + 0.2); // pixels per metre
     const Hy = (z) => ground - z * m;
     ctx.strokeStyle = "rgba(255,255,255,.3)"; ctx.beginPath(); ctx.moveTo(x0 + 6, ground + 0.5); ctx.lineTo(x0 + w - 6, ground + 0.5); ctx.stroke();
 
     // rack
     const rx0 = x0 + w * 0.56, rx1 = x0 + w - 12;
-    ctx.fillStyle = "#1f232a"; ctx.fillRect(rx0, Hy(2.85), rx1 - rx0, 2.85 * m);
+    ctx.fillStyle = "#1f232a"; ctx.fillRect(rx0, Hy(RACK_H), rx1 - rx0, RACK_H * m);
     ctx.fillStyle = "#d9561d";
-    ctx.fillRect(rx0, Hy(2.85), 4, 2.85 * m); ctx.fillRect(rx1 - 4, Hy(2.85), 4, 2.85 * m);
-    [0.05, 0.95, 1.85, 2.75].forEach((z) => ctx.fillRect(rx0, Hy(z) - 3, rx1 - rx0, 4));
+    ctx.fillRect(rx0, Hy(RACK_H), 4, RACK_H * m); ctx.fillRect(rx1 - 4, Hy(RACK_H), 4, RACK_H * m);
+    BEAMS.forEach((z) => ctx.fillRect(rx0, Hy(z) - 2, rx1 - rx0, 3));
     LEVELS.forEach((z, k) => {
       const c = codes[si][k];
-      ctx.fillStyle = "#8c6c48"; ctx.fillRect(rx0 + 10, Hy(z + 0.35) , rx1 - rx0 - 20, Hy(z - 0.38) - Hy(z + 0.35));
+      ctx.fillStyle = "#8c6c48"; ctx.fillRect(rx0 + 10, Hy(z + 0.75), rx1 - rx0 - 20, Hy(z - 0.45) - Hy(z + 0.75));
       const lw = Math.min(46, (rx1 - rx0) * 0.45), lh = Math.max(9, 0.26 * m);
       const lx = rx0 + 14, ly = Hy(z) - lh / 2;
       ctx.fillStyle = "#e8e7e3"; ctx.fillRect(lx, ly, lw, lh);
@@ -308,37 +310,41 @@
       ctx.fillText(c.done ? `L${k + 1} ✓` : c.p > 0 ? `L${k + 1} ${Math.round(c.p)}%` : `L${k + 1}`, lx + lw + 6, Hy(z) + 3);
     });
 
-    // robot seen from behind: body, LiDAR puck, mast, camera carriage
-    const cx = x0 + w * 0.2, bw = Math.max(26, 0.55 * m), bh = 0.38 * m;
-    ctx.fillStyle = "#8a9099"; ctx.fillRect(cx - 2.5, Hy(MAST_MAX), 5, (MAST_MAX - 0.38) * m);
-    ctx.fillStyle = C.robot; ctx.fillRect(cx - bw / 2, Hy(0.38), bw, bh);
+    // robot seen from behind: body, LiDAR puck and the camera head sitting on top
+    const rs = m * 2.2; // robot drawn larger than scale so it stays readable
+    const cx = x0 + w * 0.2, bw = 0.6 * rs, bh = 0.38 * rs, top = ground - bh;
+    ctx.fillStyle = C.robot; ctx.fillRect(cx - bw / 2, top, bw, bh);
     ctx.fillStyle = "#0a0b0d"; ctx.beginPath(); ctx.arc(cx - bw / 3, ground - 2, 3, 0, 7); ctx.arc(cx + bw / 3, ground - 2, 3, 0, 7); ctx.fill();
     // LiDAR: scans a flat plane around the robot
-    const lz = Hy(0.46);
-    ctx.fillStyle = C.lidar; ctx.fillRect(cx - 7, lz - 3, 14, 6);
+    const lz = top - 3;
+    ctx.fillStyle = C.lidar; ctx.fillRect(cx - bw / 2 + 3, lz - 3, 12, 6);
     ctx.strokeStyle = "rgba(110,231,168,.55)"; ctx.setLineDash([3, 3]); ctx.lineWidth = 1;
-    ctx.beginPath(); ctx.moveTo(x0 + 8, lz); ctx.lineTo(cx - 9, lz); ctx.moveTo(cx + 9, lz); ctx.lineTo(rx0, lz); ctx.stroke(); ctx.setLineDash([]);
-    ctx.fillStyle = C.lidar; ctx.font = font(9, 600); ctx.fillText("LiDAR", x0 + 8, lz - 5);
-    // camera carriage on the mast and its view onto the rack
-    const cz = Hy(bot.mast);
+    ctx.beginPath(); ctx.moveTo(x0 + 8, lz); ctx.lineTo(cx - bw / 2, lz); ctx.moveTo(cx + bw / 2, lz); ctx.lineTo(rx0, lz); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = C.lidar; ctx.font = font(9, 600); ctx.fillText("LiDAR", x0 + 8, lz - 6);
+
+    // camera: fixed on the robot, only its angle changes
+    const camX = cx + bw / 2 - 8, camY = top - 9;
+    const run = rx0 - camX;
+    // tilt in screen space: at each level's tilt the beam lands exactly on that label
+    const ang = Math.atan2(camY - Hy(CAM_Z + Math.tan(bot.tilt) * CAM_DIST), run);
     const looking = atStop && Math.abs(bot.cam) > 1.2;
     if (looking) {
+      const half = 0.07, yAt = (a) => camY - Math.tan(a) * run;
       ctx.fillStyle = "rgba(127,227,255,.22)";
-      ctx.beginPath(); ctx.moveTo(cx + 8, cz); ctx.lineTo(rx0 + 10, cz - 0.32 * m); ctx.lineTo(rx0 + 10, cz + 0.32 * m); ctx.closePath(); ctx.fill();
-      ctx.strokeStyle = "rgba(127,227,255,.8)"; ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(camX, camY); ctx.lineTo(rx0 + 8, yAt(ang + half)); ctx.lineTo(rx0 + 8, yAt(ang - half)); ctx.closePath(); ctx.fill();
+      ctx.strokeStyle = "rgba(127,227,255,.8)"; ctx.lineWidth = 1; ctx.stroke();
     }
-    ctx.fillStyle = C.cam; ctx.fillRect(cx - 6, cz - 5, 14, 10);
-    ctx.strokeStyle = "#0a0b0d"; ctx.strokeRect(cx - 6, cz - 5, 14, 10);
+    if (bot.tilt > 0.02) { // arc showing how far the camera is angled up
+      ctx.strokeStyle = "rgba(127,227,255,.5)"; ctx.setLineDash([2, 2]);
+      ctx.beginPath(); ctx.arc(camX, camY, 16, -Math.max(0, ang), 0); ctx.stroke(); ctx.setLineDash([]);
+    }
+    ctx.fillStyle = "#3a3d42"; ctx.fillRect(camX - 3, camY + 1, 6, top - camY - 1); // short fixed mount
+    ctx.save(); ctx.translate(camX, camY); ctx.rotate(-ang);
+    ctx.fillStyle = C.cam; ctx.fillRect(-6, -4, 13, 8);
+    ctx.fillStyle = "#0a0b0d"; ctx.fillRect(6, -2.5, 3, 5);
+    ctx.restore();
     ctx.fillStyle = C.cam; ctx.font = font(9, 600);
-    ctx.fillText("CAMERA", cx - 54, cz + 3);
-    ctx.fillStyle = C.text; ctx.font = font(9);
-    ctx.fillText(`${bot.mast.toFixed(2)} m`, cx - 54, cz + 14);
-    if (phase === "lift" || phase === "lower") {
-      ctx.fillStyle = C.cam; ctx.beginPath();
-      const up = phase === "lift" && bot.mast < LEVELS[Math.min(level, LEVELS.length - 1)];
-      const ay = up ? cz - 12 : cz + 12;
-      ctx.moveTo(cx + 14, ay); ctx.lineTo(cx + 19, ay + (up ? 6 : -6)); ctx.lineTo(cx + 9, ay + (up ? 6 : -6)); ctx.fill();
-    }
+    ctx.fillText("CAMERA", camX - 24, camY - 10);
   }
 
   function draw() {
@@ -354,8 +360,8 @@
       case "done": return "Goal reached";
       case "settle": return "Stopped";
       case "camOut": return "Camera to rack";
-      case "lift": return `Reading level ${Math.min(level + 1, LEVELS.length)}/${LEVELS.length}`;
-      case "lower": return "Camera down";
+      case "lift": return `Camera up · level ${Math.min(level + 1, LEVELS.length)}/${LEVELS.length}`;
+      case "lower": return "Camera level";
       case "camIn": return "Camera forward";
       default: {
         const tgt = MISSION[wp];

@@ -104,7 +104,7 @@
         </div>
         <div data-reveal style="margin-bottom:var(--s-5)">
           <div data-include="detect"></div>
-          <p class="dd-caption">Simplified illustration of a BARCONA AI result. Labels and IDs are fictional.</p>
+          <p class="dd-caption">Simplified illustration of a BARCONA AI result. BARCONA AI also recognises the arrow on the shelf label, so it knows which level the label belongs to. Labels and IDs are fictional.</p>
         </div>
         <p style="margin-top:2rem" data-reveal><a class="link-arrow" href="barcona-ai.html">How BARCONA AI works <span>→</span></a></p>
       </div>
@@ -202,16 +202,16 @@
             <p class="eyebrow">Simulation</p>
             <h2>Watch a scan mission.</h2>
           </div>
-          <p class="lead" data-reveal style="--d:.1s">We test navigation and scanning in simulation before anything runs on real hardware. Here's a simplified example mission: the robot stops at each rack and moves its camera up and down to read every shelf level.</p>
+          <p class="lead" data-reveal style="--d:.1s">We test navigation and scanning in simulation before anything runs on real hardware. Here's a simplified example mission: the robot stops at each rack and angles its camera upwards to read every shelf level, right to the top.</p>
         </div>
         <div class="map-wrap" data-reveal>
           <div class="map-stage">
             <span class="hud-label hud-label--tl"><span class="rec"></span>Simulation · example hall</span>
             <span class="hud-label hud-label--br">Simplified demo</span>
-            <canvas id="floor-map" aria-label="Simulation: a robot drives a warehouse aisle, stops at each rack and moves its camera up and down to read the barcodes on every shelf level" role="img"></canvas>
+            <canvas id="floor-map" aria-label="Simulation: a robot drives a warehouse aisle, stops at each rack and tilts its camera up to read the barcodes on every shelf level" role="img"></canvas>
           </div>
           <dl class="map-side">
-            <div class="readout"><dt>Barcodes scanned</dt><dd class="cyan" data-map="scanned">0/12</dd></div>
+            <div class="readout"><dt>Barcodes scanned</dt><dd class="cyan" data-map="scanned">0/16</dd></div>
             <div class="readout"><dt>Mission time</dt><dd data-map="elapsed">0.0 s</dd></div>
             <div class="readout"><dt>State</dt><dd class="orange" data-map="state" style="font-size:1.4rem">Driving</dd></div>
             <div class="scan-log"><h4>Scan log</h4><ol data-map="log"></ol></div>
@@ -258,7 +258,7 @@
           <li class="done" data-reveal><time>Sep 2025</time><h3>Core software architecture</h3><p>The foundation for sensor input, data processing and mapping was laid out.</p></li>
           <li class="done" data-reveal><time>Feb 2026</time><h3>First recognition experiments</h3><p>A first camera setup started picking out barcodes in live images.</p></li>
           <li class="done" data-reveal><time>Mar 2026</time><h3>Motorised camera control</h3><p>The camera learned to pan, tilt and zoom on its own towards what it detects.</p></li>
-          <li class="done" data-reveal><time>Apr 2026</time><h3>Camera testing</h3><p>From early April we tested the camera chain end to end, then added an up-and-down scan that reads rack levels one by one.</p></li>
+          <li class="done" data-reveal><time>Apr 2026</time><h3>Camera testing</h3><p>From early April we tested the camera chain end to end, then added a tilt scan: the camera angles up the rack and reads it level by level.</p></li>
           <li class="done" data-reveal><time>May 2026</time><h3>Warehouse simulation</h3><p>A simulated hall lets us test navigation and scan routines before they run on hardware.</p></li>
           <li class="done" data-reveal><time>Jul 2026</time><h3>Our own detection model</h3><p>We trained a recognition model on our own warehouse images.</p></li>
           <li class="done" data-reveal><time>Nov 2026</time><h3>BARCONA AI software core</h3><p>The TraceUnit work grew into a software core that turns warehouse images into inventory data.</p></li>
