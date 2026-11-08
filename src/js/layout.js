@@ -26,13 +26,31 @@
       <rect x="6" y="15.4" width="20" height="1.2" fill="#ff5b1f"/>
     </svg>`;
 
+  // German copy lives in /bs-german/ and shares these scripts
+  const DE = location.pathname.includes("/bs-german/");
+  const T = DE ? {
+    about: "Über uns", contact: "Kontakt", cta: "Kontakt aufnehmen", skip: "Zum Inhalt springen", menu: "Menü",
+    home: "Barcona Systems, Startseite", mainNav: "Hauptnavigation",
+    tagline: "Autonome Vision-Systeme für Bestandskontrolle in Echtzeit. Entwickelt in Lörrach.",
+    product: "Produkt", demo: "Live-Kartendemo", company: "Unternehmen", aboutTeam: "Über uns &amp; Team", legal: "Rechtliches",
+    country: "Lörrach, BW, Deutschland", switchLabel: "EN", switchTitle: "English version", switchLang: "en",
+  } : {
+    about: "About", contact: "Contact", cta: "Get in touch", skip: "Skip to content", menu: "Menu",
+    home: "Barcona Systems, home", mainNav: "Main",
+    tagline: "Autonomous vision systems for real-time inventory control. Built in Lörrach, Germany.",
+    product: "Product", demo: "Live map demo", company: "Company", aboutTeam: "About &amp; team", legal: "Legal",
+    country: "Lörrach, BW, Germany", switchLabel: "DE", switchTitle: "Deutsche Version", switchLang: "de",
+  };
+  const file = location.pathname.split("/").pop() || "index.html";
+  const switchHref = DE ? "../" + file : "bs-german/" + file;
+
   const NAV = [
     ["barcona-ai.html", "BARCONA AI"],
     ["detection-unit.html", "Detection Unit"],
     ["traceunit.html", "TraceUnit"],
-    ["about.html", "About"],
+    ["about.html", T.about],
     ["news.html", "News"],
-    ["contact.html", "Contact"],
+    ["contact.html", T.contact],
   ];
 
   // Works for local files ("traceunit.html") and Squarespace URLs ("/traceunit")
@@ -40,16 +58,17 @@
   const page = norm(location.pathname);
 
   const header = `
-    <a class="skip-link" href="#main">Skip to content</a>
+    <a class="skip-link" href="#main">${T.skip}</a>
     <header class="site-header" id="top">
       <div class="container header-inner">
-        <a class="brand" href="index.html" aria-label="Barcona Systems, home">${LOGO}<span>BARCONA<b>Systems</b></span></a>
-        <nav class="nav" id="site-nav" aria-label="Main">
+        <a class="brand" href="index.html" aria-label="${T.home}">${LOGO}<span>BARCONA<b>Systems</b></span></a>
+        <nav class="nav" id="site-nav" aria-label="${T.mainNav}">
           ${NAV.map(([href, label]) => `<a href="${href}"${norm(href) === page && !href.includes("#") ? ' aria-current="page"' : ""}>${label}</a>`).join("")}
-          <a class="btn btn-primary nav-cta-mobile" href="contact.html">Get in touch <span class="arrow">→</span></a>
+          <a class="lang-switch" href="${switchHref}" hreflang="${T.switchLang}" lang="${T.switchLang}" title="${T.switchTitle}">${T.switchLabel}</a>
+          <a class="btn btn-primary nav-cta-mobile" href="contact.html">${T.cta} <span class="arrow">→</span></a>
         </nav>
-        <a class="btn btn-primary btn-sm header-cta" href="contact.html">Get in touch <span class="arrow">→</span></a>
-        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+        <a class="btn btn-primary btn-sm header-cta" href="contact.html">${T.cta} <span class="arrow">→</span></a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">${T.menu}</button>
       </div>
     </header>`;
 
@@ -59,28 +78,28 @@
         <div class="footer-grid">
           <div>
             <a class="brand" href="index.html" style="margin-bottom:1rem">${LOGO}<span>BARCONA<b>Systems</b></span></a>
-            <p>Autonomous vision systems for real-time inventory control. Built in Lörrach, Germany.</p>
+            <p>${T.tagline}</p>
             <a class="link-arrow" href="mailto:info@barconasystems.de">info@barconasystems.de <span>→</span></a>
           </div>
           <div>
-            <h4>Product</h4>
+            <h4>${T.product}</h4>
             <ul>
               <li><a href="barcona-ai.html">BARCONA AI</a></li>
               <li><a href="detection-unit.html">Detection Unit</a></li>
               <li><a href="traceunit.html">TraceUnit-1-30x</a></li>
-              <li><a href="index.html#demo">Live map demo</a></li>
+              <li><a href="index.html#demo">${T.demo}</a></li>
             </ul>
           </div>
           <div>
-            <h4>Company</h4>
+            <h4>${T.company}</h4>
             <ul>
-              <li><a href="about.html">About &amp; team</a></li>
+              <li><a href="about.html">${T.aboutTeam}</a></li>
               <li><a href="news.html">News</a></li>
-              <li><a href="contact.html">Contact</a></li>
+              <li><a href="contact.html">${T.contact}</a></li>
             </ul>
           </div>
           <div>
-            <h4>Legal</h4>
+            <h4>${T.legal}</h4>
             <ul>
               <li><a href="impressum.html">Impressum</a></li>
               <li><a href="datenschutz.html">Datenschutz</a></li>
@@ -90,7 +109,7 @@
         <p class="footer-wordmark" aria-hidden="true">BARCONA</p>
       </div>
       <div class="container footer-bottom">
-        <span>© <span data-year>2026</span> Barcona Systems · Lörrach, BW, Germany</span>
+        <span>© <span data-year>2026</span> Barcona Systems · ${T.country}</span>
         <span>47.61° N, 7.66° E</span>
       </div>
     </footer>`;
@@ -105,7 +124,7 @@
     const Y = "#c9a227", Yd = "#8f7419"; // generic forklift yellow, not Barcona orange
     const MX = 312, MY = 133; // module position after the forklift's transform
     return `
-    <svg class="unit forklift" viewBox="0 0 640 440" role="img" aria-label="Illustration of the BARCONA Detection Unit: a small camera and compute module mounted on the overhead guard of an ordinary forklift, shown enlarged in an inset, reading barcodes on a shelf">
+    <svg class="unit forklift" viewBox="0 0 640 440" role="img" aria-label="${DE ? "Illustration der BARCONA Detection Unit: ein kleines Kamera- und Rechenmodul auf dem Schutzdach eines gewöhnlichen Gabelstaplers, vergrößert im Ausschnitt, liest Barcodes im Regal" : "Illustration of the BARCONA Detection Unit: a small camera and compute module mounted on the overhead guard of an ordinary forklift, shown enlarged in an inset, reading barcodes on a shelf"}">
       <defs>
         <linearGradient id="${id}-body" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:#2b3038"/><stop offset="1" style="stop-color:#14171c"/></linearGradient>
         <linearGradient id="${id}-cone" x1="0" y1="0" x2="1" y2="0"><stop offset="0" style="stop-color:#7fe3ff;stop-opacity:.4"/><stop offset="1" style="stop-color:#7fe3ff;stop-opacity:.03"/></linearGradient>
@@ -125,12 +144,12 @@
         ${label(530, 154)}${label(530, 264)}
       </g>
       <g class="dets" font-family="IBM Plex Mono, monospace" font-size="8.5" letter-spacing=".5">
-        <g class="det" style="--i:0"><rect x="496" y="114" width="34" height="20" fill="none" stroke="#7fe3ff" stroke-dasharray="3 2"/><text x="496" y="110" fill="#7fe3ff">READ</text></g>
-        <g class="det" style="--i:1"><rect x="561" y="120" width="34" height="20" fill="none" stroke="#7fe3ff" stroke-dasharray="3 2"/><text x="561" y="116" fill="#7fe3ff">READ</text></g>
-        <g class="det" style="--i:2"><rect x="526" y="150" width="34" height="20" fill="none" stroke="#7fe3ff" stroke-dasharray="3 2"/><text x="563" y="166" fill="#7fe3ff">SHELF</text></g>
-        <g class="det" style="--i:3"><rect x="492" y="226" width="34" height="20" fill="none" stroke="#ff5b1f" stroke-dasharray="3 2"/><text x="486" y="210" fill="#ff5b1f">REVIEW</text></g>
-        <g class="det" style="--i:4"><rect x="556" y="218" width="34" height="20" fill="none" stroke="#7fe3ff" stroke-dasharray="3 2"/><text x="556" y="196" fill="#7fe3ff">CONFIRMED</text></g>
-        <g class="det" style="--i:5"><rect x="502" y="332" width="34" height="20" fill="none" stroke="#7fe3ff" stroke-dasharray="3 2"/><text x="502" y="328" fill="#7fe3ff">READ</text></g>
+        <g class="det" style="--i:0"><rect x="496" y="114" width="34" height="20" fill="none" stroke="#7fe3ff" stroke-dasharray="3 2"/><text x="496" y="110" fill="#7fe3ff">${DE ? "GELESEN" : "READ"}</text></g>
+        <g class="det" style="--i:1"><rect x="561" y="120" width="34" height="20" fill="none" stroke="#7fe3ff" stroke-dasharray="3 2"/><text x="561" y="116" fill="#7fe3ff">${DE ? "GELESEN" : "READ"}</text></g>
+        <g class="det" style="--i:2"><rect x="526" y="150" width="34" height="20" fill="none" stroke="#7fe3ff" stroke-dasharray="3 2"/><text x="563" y="166" fill="#7fe3ff">${DE ? "REGAL" : "SHELF"}</text></g>
+        <g class="det" style="--i:3"><rect x="492" y="226" width="34" height="20" fill="none" stroke="#ff5b1f" stroke-dasharray="3 2"/><text x="486" y="210" fill="#ff5b1f">${DE ? "PRÜFEN" : "REVIEW"}</text></g>
+        <g class="det" style="--i:4"><rect x="556" y="218" width="34" height="20" fill="none" stroke="#7fe3ff" stroke-dasharray="3 2"/><text x="556" y="196" fill="#7fe3ff">${DE ? "BESTÄTIGT" : "CONFIRMED"}</text></g>
+        <g class="det" style="--i:5"><rect x="502" y="332" width="34" height="20" fill="none" stroke="#7fe3ff" stroke-dasharray="3 2"/><text x="502" y="328" fill="#7fe3ff">${DE ? "GELESEN" : "READ"}</text></g>
       </g>
 
       <!-- Ordinary forklift -->
@@ -181,8 +200,8 @@
         <circle class="part part-vision" cx="194" cy="89" r="3.5" fill="#7fe3ff"/>
         <circle cx="190" cy="85" r="1.6" fill="#fff" opacity=".7"/>
         <g font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing=".6" fill="#b4b8be">
-          <text x="36" y="68">COMPUTE</text>
-          <text x="146" y="61">CAMERA</text>
+          <text x="36" y="68">${DE ? "RECHNER" : "COMPUTE"}</text>
+          <text x="146" y="61">${DE ? "KAMERA" : "CAMERA"}</text>
         </g>
       </g>
     </svg>`;

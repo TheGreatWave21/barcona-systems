@@ -5,6 +5,17 @@
   const hosts = document.querySelectorAll('[data-include="detect"]');
   if (!hosts.length) return;
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // German copy (/bs-german/) shares this script
+  const DE = location.pathname.includes("/bs-german/");
+  const DICT = {
+    READ: "GELESEN", CHECK: "PRÜFEN", SHELF: "REGAL", "ARROW ↑": "PFEIL ↑",
+    Item: "Artikel", Location: "Lagerplatz", Package: "Paket",
+    Scanning: "Scannen", "Linking to shelf": "Regal zuordnen", Result: "Ergebnis",
+    Read: "Gelesen", "Not relevant": "Nicht relevant", "Needs a check": "Prüfung nötig",
+    "Linked to shelf": "Dem Regal zugeordnet", "Arrow recognised": "Pfeil erkannt",
+    "BARCONA AI · Output": "BARCONA AI · Ergebnis", "results.xlsx": "ergebnisse.xlsx",
+  };
+  const tr = (s) => (DE && DICT[s]) || s;
 
   // Seeded bars so every barcode looks the same on each load
   function bars(x, y, w, h, seed, vertical) {
@@ -61,13 +72,13 @@
     const card = "#8c6c48", white = "#cfcfcc";
     const dets = D.map(([id, kind, x, y, w, h, tag], i) => {
       const c = COLORS[kind];
-      const tw = Math.max(w, tag.length * 5.6 + 8);
+      const label = tr(tag), tw = Math.max(w, label.length * 5.6 + 8);
       // Shelf tag goes below the barcode so it doesn't cover the location text
       const ty = kind === "shelf" || y - 13 < 2 ? y + h + 4 : y - 13;
       return `<g class="dd-det" style="--i:${i}">
         <rect x="${x - 3}" y="${y - 3}" width="${w + 6}" height="${h + 6}" fill="none" stroke="${c}" stroke-width="2"${kind === "nt" ? ' stroke-dasharray="4 2.5"' : ""}/>
         <rect x="${x - 3}" y="${ty}" width="${tag ? tw : 0}" height="12" fill="${c}"/>
-        <text x="${x}" y="${ty + 9}" font-family="IBM Plex Mono, monospace" font-size="8.5" font-weight="600" fill="#0a0b0d">${tag}</text>
+        <text x="${x}" y="${ty + 9}" font-family="IBM Plex Mono, monospace" font-size="8.5" font-weight="600" fill="#0a0b0d">${label}</text>
       </g>`;
     }).join("");
     const tgt = D.filter((d) => d[0].startsWith("TARGET"));
@@ -80,7 +91,7 @@
     }).join("");
 
     return `
-    <svg class="dd-svg" viewBox="0 0 800 680" role="img" aria-label="Simplified illustration of a BARCONA AI result: packages on a warehouse shelf with read barcodes linked to the shelf">
+    <svg class="dd-svg" viewBox="0 0 800 680" role="img" aria-label="${DE ? "Vereinfachte Illustration eines BARCONA-AI-Ergebnisses: Pakete in einem Lagerregal, gelesene Barcodes werden dem Regal zugeordnet" : "Simplified illustration of a BARCONA AI result: packages on a warehouse shelf with read barcodes linked to the shelf"}">
       <rect width="800" height="680" fill="#1b1a17"/>
       <!-- back of rack -->
       <rect x="580" y="40" width="110" height="640" fill="#24231f"/>
@@ -128,8 +139,8 @@
   }
 
   function table() {
-    return `<table class="dd-table"><thead><tr><th>Item</th><th>Barcode</th><th>Location</th><th>Status</th></tr></thead><tbody>${ROWS.map(
-      (r, i) => `<tr style="--i:${i}"><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td class="st-${r[3].toLowerCase()}">${r[3]}</td></tr>`
+    return `<table class="dd-table"><thead><tr><th>${tr("Item")}</th><th>Barcode</th><th>${tr("Location")}</th><th>Status</th></tr></thead><tbody>${ROWS.map(
+      (r, i) => `<tr style="--i:${i}"><td>${r[0].replace("Package", tr("Package"))}</td><td>${r[1]}</td><td>${r[2]}</td><td class="st-${r[3].toLowerCase()}">${tr(r[3])}</td></tr>`
     ).join("")}</tbody></table>`;
   }
 
@@ -138,19 +149,19 @@
     el.className = "dd";
     el.innerHTML = `
       <div class="dd-stage">
-        <span class="hud-label hud-label--tl"><span class="rec"></span>BARCONA AI · Output</span>
-        <span class="hud-label hud-label--tr dd-phase" aria-live="off">Scanning</span>
+        <span class="hud-label hud-label--tl"><span class="rec"></span>${tr("BARCONA AI · Output")}</span>
+        <span class="hud-label hud-label--tr dd-phase" aria-live="off">${tr("Scanning")}</span>
         ${svg()}
       </div>
       <div class="dd-side">
         <div class="dd-legend">
-          <span><i style="background:${COLORS.ok}"></i>Read</span>
-          <span><i style="background:${COLORS.nt}"></i>Not relevant</span>
-          <span><i style="background:${COLORS.bad}"></i>Needs a check</span>
-          <span><i style="background:#4fb3ff"></i>Linked to shelf</span>
-          <span><i style="background:${COLORS.arrow}"></i>Arrow recognised</span>
+          <span><i style="background:${COLORS.ok}"></i>${tr("Read")}</span>
+          <span><i style="background:${COLORS.nt}"></i>${tr("Not relevant")}</span>
+          <span><i style="background:${COLORS.bad}"></i>${tr("Needs a check")}</span>
+          <span><i style="background:#4fb3ff"></i>${tr("Linked to shelf")}</span>
+          <span><i style="background:${COLORS.arrow}"></i>${tr("Arrow recognised")}</span>
         </div>
-        <div class="dd-excel"><div class="dd-excel-head">results.xlsx</div>${table()}</div>
+        <div class="dd-excel"><div class="dd-excel-head">${tr("results.xlsx")}</div>${table()}</div>
       </div>`;
     host.replaceWith(el);
 
@@ -166,10 +177,10 @@
       timers.forEach(clearTimeout); timers = [];
       el.classList.remove("is-sweep", "is-det", "is-rel", "is-rows");
       void el.offsetWidth;
-      steps.forEach(([cls, text, t]) => timers.push(setTimeout(() => { el.classList.add(cls); phase.textContent = text; }, t)));
+      steps.forEach(([cls, text, t]) => timers.push(setTimeout(() => { el.classList.add(cls); phase.textContent = tr(text); }, t)));
       timers.push(setTimeout(play, 14000));
     }
-    if (reduce) { el.classList.add("is-det", "is-rel", "is-rows"); phase.textContent = "Result"; return; }
+    if (reduce) { el.classList.add("is-det", "is-rel", "is-rows"); phase.textContent = tr("Result"); return; }
     let started = false;
     new IntersectionObserver((entries) => entries.forEach((e) => {
       if (e.isIntersecting && !started) { started = true; play(); }

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="de" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Neuigkeiten | Barcona Systems</title>
+  <meta name="description" content="Fortschrittsberichte von Barcona Systems zur Entwicklung von BARCONA AI und der TraceUnit-1-30x.">
+  <meta name="theme-color" content="#0a0b0d">
+  <link rel="alternate" hreflang="en" href="../news.html">
+  <link rel="icon" href="../public/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../src/css/tokens.css?v=202611081708">
+  <link rel="stylesheet" href="../src/css/base.css?v=202611081708">
+  <link rel="stylesheet" href="../src/css/components.css?v=202611081708">
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <p class="crumbs"><a href="index.html">Start</a> / News</p>
+        <p class="eyebrow">Entwicklungstagebuch</p>
+        <h1>Neuigkeiten &amp; Fortschritt.</h1>
+        <p class="lead">Neues aus der Werkstatt: was wir gebaut haben, was wir gelernt haben und was als Nächstes kommt.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <!-- Neuen Beitrag hinzufügen: einen <article class="post">-Block kopieren, neueste zuerst. -->
+        <div class="posts">
+          <article class="post" id="software-core" data-reveal>
+            <div><time datetime="2026-07">Jul 2026</time><p style="margin-top:.6rem"><span class="badge badge--accent">Produkt</span></p></div>
+            <div>
+              <h2>Von der TraceUnit-Idee zum Software-Kern – und eine neue Detection Unit</h2>
+              <p>Was als Roboterkonzept mit früher Bilderkennung begann, ist zu BARCONA AI gewachsen: einem Software-Kern, der aus Lagerbildern und Videos Bestandsdaten macht.</p>
+              <p>Mit dem fertigen Kern führen wir einen zweiten Einsatzweg ein. Die <a href="detection-unit.html" style="text-decoration:underline">Detection Unit</a> montiert ein Kamera- und Rechenmodul an bestehende Gabelstapler, sodass der Bestand im normalen Betrieb erfasst wird. Ein erster Testaufbau ist in Vorbereitung.</p>
+            </div>
+          </article>
+          <article class="post" id="own-model" data-reveal>
+            <div><time datetime="2026-06">Jun 2026</time><p style="margin-top:.6rem"><span class="badge badge--cyan">Entwicklung</span></p></div>
+            <div>
+              <h2>Unser eigenes Erkennungsmodell</h2>
+              <p>Wir haben ein Erkennungsmodell mit Bildern aus unseren eigenen Testaufbauten trainiert, statt uns auf generische Modelle zu verlassen. Es findet Barcodes auf echten Lageretiketten spürbar besser, auch schräg oder bei schlechtem Licht.</p>
+            </div>
+          </article>
+          <article class="post" id="simulation" data-reveal>
+            <div><time datetime="2026-05">Mai 2026</time><p style="margin-top:.6rem"><span class="badge badge--cyan">Entwicklung</span></p></div>
+            <div>
+              <h2>Erst in der Simulation testen</h2>
+              <p>Wir haben eine simulierte Lagerhalle gebaut, um zu testen, wie der Roboter fährt, wo er hält und wie er jedes Regal scannt. Änderungen lassen sich jetzt in Minuten ausprobieren, bevor sie überhaupt in die Nähe von Hardware kommen.</p>
+              <p>Eine vereinfachte Version einer Scan-Mission sehen Sie <a href="index.html#demo" style="text-decoration:underline">auf unserer Startseite</a>.</p>
+            </div>
+          </article>
+          <article class="post" id="camera-testing" data-reveal>
+            <div><time datetime="2026-04">Apr 2026</time><p style="margin-top:.6rem"><span class="badge badge--cyan">Entwicklung</span></p></div>
+            <div>
+              <h2>Kameratests</h2>
+              <p>Anfang April haben wir begonnen, die komplette Kamerakette durchgängig mit unseren neuen Datensätzen zu testen: einen Barcode finden, die Kamera darauf ausrichten und ihn zuverlässig lesen.</p>
+              <p>Später im Monat kam eine Neige-Routine dazu: Die Kamera bleibt auf dem Roboter, neigt sich Ebene für Ebene am Regal nach oben und behält nur die schärfsten Bilder. Das ist das Scanmuster, das die TraceUnit im Gang nutzen wird.</p>
+            </div>
+          </article>
+          <article class="post" id="datasets" data-reveal>
+            <div><time datetime="2026-03">Mär 2026</time><p style="margin-top:.6rem"><span class="badge badge--cyan">Entwicklung</span></p></div>
+            <div>
+              <h2>Datensätze und eine bewegliche Kamera</h2>
+              <p>Wir haben begonnen, eigene Datensätze aus echten Lageretiketten aufzubauen: verschiedene Drucker, Winkel, Abstände und Beleuchtung. Damit testen und trainieren wir ab jetzt.</p>
+              <p>Außerdem hat die Kamera gelernt, selbstständig auf das Erkannte zu schwenken, zu neigen und zu zoomen.</p>
+            </div>
+          </article>
+          <article class="post" id="first-software" data-reveal>
+            <div><time datetime="2026-02">Feb 2026</time><p style="margin-top:.6rem"><span class="badge badge--cyan">Entwicklung</span></p></div>
+            <div>
+              <h2>Die erste Software läuft</h2>
+              <p>Die Kernarchitektur steht: das Fundament, das Daten von Kamera, Barcode-Lesung und LiDAR aufnimmt und zu einem einheitlichen Bild des Lagers zusammenführt.</p>
+              <p>Ein erster Kameraaufbau findet bereits Barcodes in Live-Bildern. Als Nächstes: Daten, und zwar viele.</p>
+            </div>
+          </article>
+          <article class="post" id="concept" data-reveal>
+            <div><time datetime="2026-01">Jan 2026</time><p style="margin-top:.6rem"><span class="badge">Design</span></p></div>
+            <div>
+              <h2>Von der Idee zum Konzept</h2>
+              <p>Aus der Idee ist ein konkreter Plan geworden: die TraceUnit, ein autonomer Roboter, der durch die Gänge fährt, an jedem Regal hält und jeden Barcode mit seiner Kamera liest, während LiDAR verfolgt, wo er sich befindet.</p>
+            </div>
+          </article>
+          <article class="post" id="first-idea" data-reveal>
+            <div><time datetime="2025-09">Sep 2025</time><p style="margin-top:.6rem"><span class="badge">Design</span></p></div>
+            <div>
+              <h2>Wie alles begann</h2>
+              <p>Inventuren sind langsam, manuell und am Tag ihres Abschlusses schon veraltet. Genau hier hat Barcona angefangen: mit der Frage, ob nicht eine Kamera das Zählen übernehmen könnte.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta-band" data-reveal>
+          <p class="eyebrow">Auf dem Laufenden bleiben</p>
+          <h2>Updates per E-Mail?</h2>
+          <p>Schreiben Sie uns, und wir nehmen Sie in unseren Verteiler auf. Wir melden uns nur, wenn es echten Fortschritt gibt.</p>
+          <a class="btn btn-primary" href="mailto:info@barconasystems.de?subject=Bitte%20in%20den%20Barcona-Verteiler%20aufnehmen">Per E-Mail abonnieren <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div data-include="footer"></div>
+  <script src="../src/js/layout.js?v=202611081708"></script>
+  <script src="../src/js/main.js?v=202611081708" defer></script>
+</body>
+</html>

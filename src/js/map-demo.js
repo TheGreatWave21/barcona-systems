@@ -9,6 +9,17 @@
   if (!canvas) return;
   const ctx = canvas.getContext("2d");
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // German copy (/bs-german/) shares this script
+  const DE = location.pathname.includes("/bs-german/");
+  const L = DE ? {
+    level: "Ebene", camera: "KAMERA", side: "SEITENANSICHT", next: " (nächstes)", goal: "ZIEL",
+    done: "Ziel erreicht", settle: "Angehalten", camOut: "Kamera zum Regal", up: "Kamera hoch · Ebene",
+    lower: "Kamera waagerecht", camIn: "Kamera nach vorn", turn: "Wendet", brake: "Bremst", drive: "Fährt",
+  } : {
+    level: "level", camera: "CAMERA", side: "SIDE VIEW", next: " (next)", goal: "GOAL",
+    done: "Goal reached", settle: "Stopped", camOut: "Camera to rack", up: "Camera up · level",
+    lower: "Camera level", camIn: "Camera forward", turn: "Turning", brake: "Braking", drive: "Driving",
+  };
 
   const C = {
     lidar: "#6ee7a8", cam: "#7fe3ff", robot: "#ff5b1f", read: "#ffc43d",
@@ -142,7 +153,7 @@
         const c = codes[target.stop][level];
         c.p = Math.min(100, c.p + READ_RATE * dt);
         if (c.p >= 100 && !c.done) {
-          c.done = true; addLog(`${stop.tag} · level ${level + 1}`, t);
+          c.done = true; addLog(`${stop.tag} · ${L.level} ${level + 1}`, t);
           if (++level >= LEVELS.length) phase = "lower";
         }
       }
@@ -207,7 +218,7 @@
 
     ctx.strokeStyle = "rgba(127,227,255,.6)"; ctx.setLineDash([3, 3]);
     ctx.beginPath(); ctx.arc(X(GOAL.x), Y(GOAL.y), 0.35 * S, 0, Math.PI * 2); ctx.stroke(); ctx.setLineDash([]);
-    ctx.fillStyle = C.cam; ctx.font = font(9); ctx.fillText("GOAL", X(GOAL.x) - 12, Y(GOAL.y) + 0.35 * S + 12);
+    ctx.fillStyle = C.cam; ctx.font = font(9); ctx.fillText(L.goal, X(GOAL.x) - 12, Y(GOAL.y) + 0.35 * S + 12);
 
     // scan stops on the rack faces: one pip per shelf level
     STOPS.forEach((s, i) => {
@@ -272,7 +283,7 @@
     tagLabel("LiDAR 360°", lx - 18, ly + 2, C.lidar);
     const ca = bot.a + bot.cam;
     const cx = bx + Math.cos(ca) * (CAM_RANGE * S + 8), cy = by + Math.sin(ca) * (CAM_RANGE * S + 8);
-    tagLabel("CAMERA", cx - (Math.cos(ca) < -0.3 ? 58 : Math.cos(ca) > 0.3 ? 0 : 29), cy + (Math.sin(ca) > 0.3 ? 12 : Math.sin(ca) < -0.3 ? -2 : 4), C.cam);
+    tagLabel(L.camera, cx - (Math.cos(ca) < -0.3 ? 58 : Math.cos(ca) > 0.3 ? 0 : 29), cy + (Math.sin(ca) > 0.3 ? 12 : Math.sin(ca) < -0.3 ? -2 : 4), C.cam);
   }
 
   // Side view of the rack bay in front of the robot: shows the camera tilting up level by level
@@ -284,7 +295,7 @@
     ctx.fillStyle = "rgba(10,11,13,.92)"; ctx.fillRect(x0, y0, w, h);
     ctx.strokeStyle = "rgba(255,255,255,.18)"; ctx.lineWidth = 1; ctx.strokeRect(x0 + 0.5, y0 + 0.5, w - 1, h - 1);
     ctx.fillStyle = C.text; ctx.font = font(9.5, 600);
-    ctx.fillText(`SIDE VIEW · ${stop.rack}${atStop ? "" : " (next)"}`, x0 + 8, y0 + 14);
+    ctx.fillText(`${L.side} · ${stop.rack}${atStop ? "" : L.next}`, x0 + 8, y0 + 14);
 
     const ground = y0 + h - 10, m = (h - 30) / (RACK_H + 0.2); // pixels per metre
     const Hy = (z) => ground - z * m;
@@ -344,7 +355,7 @@
     ctx.fillStyle = "#0a0b0d"; ctx.fillRect(6, -2.5, 3, 5);
     ctx.restore();
     ctx.fillStyle = C.cam; ctx.font = font(9, 600);
-    ctx.fillText("CAMERA", camX - 24, camY - 10);
+    ctx.fillText(L.camera, camX - 24, camY - 10);
   }
 
   function draw() {
@@ -357,15 +368,15 @@
 
   function stateText() {
     switch (phase) {
-      case "done": return "Goal reached";
-      case "settle": return "Stopped";
-      case "camOut": return "Camera to rack";
-      case "lift": return `Camera up · level ${Math.min(level + 1, LEVELS.length)}/${LEVELS.length}`;
-      case "lower": return "Camera level";
-      case "camIn": return "Camera forward";
+      case "done": return L.done;
+      case "settle": return L.settle;
+      case "camOut": return L.camOut;
+      case "lift": return `${L.up} ${Math.min(level + 1, LEVELS.length)}/${LEVELS.length}`;
+      case "lower": return L.lower;
+      case "camIn": return L.camIn;
       default: {
         const tgt = MISSION[wp];
-        return bot.v < 0.05 && tgt && Math.hypot(tgt.x - bot.x, tgt.y - bot.y) > 0.02 ? "Turning" : bot.v < SPEED * 0.85 && tgt && tgt.stop !== undefined && Math.hypot(tgt.x - bot.x, tgt.y - bot.y) < 0.7 ? "Braking" : "Driving";
+        return bot.v < 0.05 && tgt && Math.hypot(tgt.x - bot.x, tgt.y - bot.y) > 0.02 ? L.turn : bot.v < SPEED * 0.85 && tgt && tgt.stop !== undefined && Math.hypot(tgt.x - bot.x, tgt.y - bot.y) < 0.7 ? L.brake : L.drive;
       }
     }
   }

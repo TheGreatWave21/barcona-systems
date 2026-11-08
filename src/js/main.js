@@ -72,6 +72,8 @@
     }, 900);
   }
 
+  const DE = location.pathname.includes("/bs-german/");
+
   /* Forms: no backend yet, so they open the visitor's mail app with everything pre-filled.
      To use a form service later, set data-endpoint="https://..." on the form. */
   document.querySelectorAll("form[data-mailto]").forEach((form) => {
@@ -86,17 +88,17 @@
           const res = await fetch(endpoint, { method: "POST", body: data, headers: { Accept: "application/json" } });
           if (!res.ok) throw new Error();
           form.reset();
-          if (status) status.textContent = "→ Thanks! We'll get back to you within two working days.";
+          if (status) status.textContent = (DE ? "→ Danke! Wir melden uns innerhalb von zwei Werktagen." : "→ Thanks! We'll get back to you within two working days.");
           return;
         } catch (_) {
-          if (status) status.textContent = "→ Something went wrong. Please email info@barconasystems.de directly.";
+          if (status) status.textContent = (DE ? "→ Etwas ist schiefgelaufen. Bitte schreiben Sie direkt an info@barconasystems.de." : "→ Something went wrong. Please email info@barconasystems.de directly.");
           return;
         }
       }
-      const subject = form.dataset.subject || "Website enquiry";
+      const subject = form.dataset.subject || (DE ? "Anfrage über die Website" : "Website enquiry");
       const body = [...data.entries()].filter(([k]) => k !== "consent").map(([k, v]) => `${k}: ${v}`).join("\n");
       window.location.href = `mailto:${form.dataset.mailto}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      if (status) status.textContent = "→ Your email app should open with the message ready to send.";
+      if (status) status.textContent = (DE ? "→ Ihr E-Mail-Programm sollte sich mit der fertigen Nachricht öffnen." : "→ Your email app should open with the message ready to send.");
     });
   });
 

@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="de" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Barcona Systems | Autonome Bildverarbeitung für Bestandskontrolle in Echtzeit</title>
+  <meta name="description" content="Barcona Systems entwickelt BARCONA AI, einen Vision-Kern für Lager, der Barcodes erkennt, liest und zuordnet – auf Gabelstapler-montierten Detection Units oder der autonomen TraceUnit-1-30x.">
+  <meta property="og:title" content="Barcona Systems | Ein Lager, das sich selbst sieht">
+  <meta property="og:description" content="Autonome Vision-Systeme für Bestandskontrolle in Echtzeit. Entwickelt in Lörrach.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0a0b0d">
+  <link rel="alternate" hreflang="en" href="../index.html">
+  <link rel="icon" href="../public/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../src/css/tokens.css?v=202611081708">
+  <link rel="stylesheet" href="../src/css/base.css?v=202611081708">
+  <link rel="stylesheet" href="../src/css/components.css?v=202611081708">
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">Vision-KI fürs Lager · Entwickelt in Lörrach</p>
+          <h1>
+            <span class="line"><span>Ein Lager,</span></span>
+            <span class="line"><span style="--d:.1s">das sich</span></span>
+            <span class="line"><span style="--d:.2s">selbst <em>sieht.</em></span></span>
+          </h1>
+          <p class="lead">BARCONA AI erkennt, liest und ordnet jeden Barcode in Ihrem Lager zu und markiert alles, was nicht stimmt. Es läuft auf einer Kamera an Ihren vorhandenen Gabelstaplern oder auf einem autonomen Roboter.</p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="contact.html">Kontakt aufnehmen <span class="arrow">→</span></a>
+            <a class="btn btn-ghost" href="#deploy">Zu den Produkten</a>
+          </div>
+          <div class="hero-meta">
+            <div>Kern<strong>BARCONA AI</strong></div>
+            <div>Hardware<strong>Detection Unit · TraceUnit</strong></div>
+            <div>Standort<strong>Lörrach, Deutschland</strong></div>
+          </div>
+        </div>
+        <div class="hud hud-corners">
+          <span class="hud-label hud-label--tl"><span class="rec"></span>Live · Detection Unit</span>
+          <span class="hud-label hud-label--tr">BARCONA AI Kern</span>
+          <span class="hud-label hud-label--bl">Erkennen · Lesen · Zuordnen · Prüfen</span>
+          <span class="hud-label hud-label--br">Ausgabe: <b>ergebnisse.xlsx</b></span>
+          <div data-include="forklift" data-live></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Erkennen</span><span>Lesen</span><span>Zuordnen</span><span>Prüfen</span><span>Bestandsdaten live</span><span>Am Gabelstapler</span><span>Autonomes Scannen</span><span>Excel-Ausgabe</span>
+        <span>Erkennen</span><span>Lesen</span><span>Zuordnen</span><span>Prüfen</span><span>Bestandsdaten live</span><span>Am Gabelstapler</span><span>Autonomes Scannen</span><span>Excel-Ausgabe</span>
+      </div>
+    </div>
+
+    <!-- ============ PROBLEM ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal>
+            <p class="eyebrow">Das Problem</p>
+            <h2>Lager verlieren den Überblick über das, was sie schon besitzen.</h2>
+          </div>
+          <p class="lead" data-reveal style="--d:.1s">Ware landet am falschen Platz, Etiketten werden beschädigt und manuelle Zählungen hinken der Realität tagelang hinterher. Jeder Fehler kostet Zeit für Suchen, Umlagern und Korrigieren.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card" data-reveal>
+            <span class="num">01 / FALSCH EINGELAGERT</span>
+            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/></svg></div>
+            <h3>Falsches Regal, verlorene Ware</h3>
+            <p>Ein Paket am falschen Platz ist praktisch weg, bis jemand zufällig darüber stolpert.</p>
+          </article>
+          <article class="card" data-reveal style="--d:.08s">
+            <span class="num">02 / MANUELL</span>
+            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+            <h3>Zählen bindet Personal</h3>
+            <p>Handscanner und Inventuren binden Mitarbeitende und liefern nur eine Momentaufnahme, nie den aktuellen Stand.</p>
+          </article>
+          <article class="card" data-reveal style="--d:.16s">
+            <span class="num">03 / BLINDE FLECKEN</span>
+            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><path d="M4 4l16 16"/></svg></div>
+            <h3>Etiketten versagen</h3>
+            <p>Beschädigte, verdeckte oder fehlende Barcodes bringen Systeme ins Stolpern, die sich nur aufs Scannen verlassen.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BARCONA AI ============ -->
+    <section class="section section--line" id="ai">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal>
+            <p class="eyebrow">BARCONA AI</p>
+            <h2>Ein Bild rein. Ein strukturiertes Ergebnis raus.</h2>
+          </div>
+          <p class="lead" data-reveal style="--d:.1s">Unser Software-Kern macht aus Kamerabildern und Videos Barcode-Werte, Lagerplatz-Zuordnungen und klare Status-Markierungen – bereit für Excel oder Ihre Systeme.</p>
+        </div>
+        <div data-reveal style="margin-bottom:var(--s-5)">
+          <div data-include="detect"></div>
+          <p class="dd-caption">Vereinfachte Illustration eines BARCONA-AI-Ergebnisses. BARCONA AI erkennt auch den Pfeil auf dem Regaletikett und weiß so, zu welcher Ebene das Etikett gehört. Etiketten und IDs sind fiktiv.</p>
+        </div>
+        <p style="margin-top:2rem" data-reveal><a class="link-arrow" href="barcona-ai.html">So funktioniert BARCONA AI <span>→</span></a></p>
+      </div>
+    </section>
+
+    <!-- ============ TWO WAYS TO DEPLOY ============ -->
+    <section class="section section--line" id="deploy">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal>
+            <p class="eyebrow">Zwei Einsatzwege</p>
+            <h2>Ein KI-Kern. Zwei Wege zum Regal.</h2>
+          </div>
+          <p class="lead" data-reveal style="--d:.1s">Nutzen Sie die Gabelstapler, die Sie ohnehin fahren, oder schicken Sie einen autonomen Roboter auf feste Routen. Oder kombinieren Sie beides.</p>
+        </div>
+        <div class="duo">
+          <a class="duo-card" href="detection-unit.html" data-reveal>
+            <div class="hud hud-corners"><span class="hud-label hud-label--tl"><span class="rec"></span>Detection Unit</span><div data-include="forklift" data-live></div></div>
+            <div class="duo-body">
+              <span class="badge badge--accent" style="justify-self:start;margin:0">Testaufbau in Vorbereitung</span>
+              <h3>Detection Unit</h3>
+              <p>Ein Kamera- und Rechenmodul an bestehenden Gabelstaplern. Es erfasst den Bestand im normalen Betrieb, braucht weniger Robotik und besteht aus Standardkomponenten.</p>
+              <span class="link-arrow">Zur Detection Unit <span>→</span></span>
+            </div>
+          </a>
+          <a class="duo-card" href="traceunit.html" data-reveal style="--d:.08s">
+            <div class="hud hud-corners"><span class="hud-label hud-label--tl"><span class="rec"></span>TraceUnit-1-30x</span><span class="hud-label hud-label--br">Illustration</span><div class="pkg-scene" data-package-scene data-auto></div></div>
+            <div class="duo-body">
+              <span class="badge" style="justify-self:start;margin:0">Prototyp</span>
+              <h3>TraceUnit-1-30x</h3>
+              <p>Ein autonomer Roboter, der eigene Scan-Missionen auf festen Routen fährt – unabhängig vom Staplerverkehr, mit Barcode-Lesung, KI-Bilderkennung und LiDAR.</p>
+              <span class="link-arrow">Zur TraceUnit <span>→</span></span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HOW IT WORKS (sticky scene) ============ -->
+    <section class="section section--line" id="how">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal>
+            <p class="eyebrow">So funktioniert es</p>
+            <h2>Drei Sensoren. Ein Bild Ihrer Lagerfläche.</h2>
+          </div>
+          <p class="lead" data-reveal style="--d:.1s">Jeder Sensor gleicht die Schwächen der anderen aus. Zusammen liefern sie ein verlässliches, laufend aktualisiertes Bild jedes Pakets. Die Animation zeigt Schritt für Schritt die Sensoren, die unser Roboter vereinen würde.</p>
+        </div>
+
+        <div class="scene" data-scene>
+          <div class="scene-figure" data-active="scan">
+            <div class="hud hud-corners">
+              <span class="hud-label hud-label--tl"><span class="rec"></span>Sensor: <b data-scene-label>Barcode</b></span>
+              <span class="hud-label hud-label--br">Illustration</span>
+              <div class="pkg-scene" data-package-scene></div>
+            </div>
+            <div class="scene-progress" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+            <p class="scene-note"><b>Illustration, kein Produktdesign.</b> Sie zeigt die Sensoren, die unser Roboter vereinen würde, und was das System mit ihnen insgesamt leisten kann. In der Praxis sitzen sie gemeinsam auf einem Gerät; welche Sensoren genutzt und wie sie montiert werden, lässt sich für Ihren Standort anpassen und besprechen.</p>
+          </div>
+
+          <div class="scene-steps">
+            <article class="step" data-step="scan" data-label="Barcode">
+              <p class="tag">01 · Scannen</p>
+              <h3>Liest jedes Etikett im Vorbeifahren</h3>
+              <p>Eine Kamera liest den Barcode auf jedem Etikett, während die Einheit durch den Gang fährt. Niemand muss einen Handscanner halten.</p>
+              <ul><li>Durchgehendes Scannen während der Fahrt</li><li>Erkennt Artikel- und Paket-ID</li></ul>
+            </article>
+            <article class="step" data-step="recognise" data-label="KI-Bilderkennung">
+              <p class="tag">02 · Erkennen</p>
+              <h3>Sieht, was Etiketten nicht verraten</h3>
+              <p>Eine Kamera mit KI-Bilderkennung prüft, wie ein Paket tatsächlich aussieht. So hinterlassen beschädigte oder verdeckte Etiketten keine Lücken.</p>
+              <ul><li>Visueller Abgleich gescannter Artikel</li><li>Funktioniert auch bei unlesbaren Etiketten</li></ul>
+            </article>
+            <article class="step" data-step="map" data-label="LiDAR">
+              <p class="tag">03 · Kartieren</p>
+              <h3>Weiß genau, wo alles ist</h3>
+              <p>LiDAR erfasst den Raum rund um die Einheit und gibt jedem erkannten Paket eine genaue Position auf einer Live-Karte.</p>
+              <ul><li>360° Erfassungsbereich</li><li>Standortkartierung in Echtzeit</li></ul>
+            </article>
+            <article class="step" data-step="flag" data-label="Fehlererkennung">
+              <p class="tag">04 · Markieren</p>
+              <h3>Erkennt Fehler sofort</h3>
+              <p>Liegt etwas am falschen Platz oder ist falsch etikettiert, markiert das System es – damit Ihr Team es jetzt behebt und nicht erst bei der nächsten Inventur.</p>
+              <ul><li>Erkennung falsch eingelagerter Pakete</li><li>Erkennung falscher Etiketten</li></ul>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LIVE MAP DEMO ============ -->
+    <section class="section section--line" id="demo">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal>
+            <p class="eyebrow">Simulation</p>
+            <h2>Eine Scan-Mission ansehen.</h2>
+          </div>
+          <p class="lead" data-reveal style="--d:.1s">Wir testen Navigation und Scannen in der Simulation, bevor irgendetwas auf echter Hardware läuft. Hier eine vereinfachte Beispielmission: Der Roboter hält an jedem Regal und neigt seine Kamera nach oben, um jede Regalebene bis ganz oben zu lesen.</p>
+        </div>
+        <div class="map-wrap" data-reveal>
+          <div class="map-stage">
+            <span class="hud-label hud-label--tl"><span class="rec"></span>Simulation · Beispielhalle</span>
+            <span class="hud-label hud-label--br">Vereinfachte Demo</span>
+            <canvas id="floor-map" aria-label="Simulation: Ein Roboter fährt durch einen Lagergang, hält an jedem Regal und neigt seine Kamera nach oben, um die Barcodes auf jeder Regalebene zu lesen" role="img"></canvas>
+          </div>
+          <dl class="map-side">
+            <div class="readout"><dt>Gescannte Barcodes</dt><dd class="cyan" data-map="scanned">0/16</dd></div>
+            <div class="readout"><dt>Missionszeit</dt><dd data-map="elapsed">0.0 s</dd></div>
+            <div class="readout"><dt>Status</dt><dd class="orange" data-map="state" style="font-size:1.4rem">Fährt</dd></div>
+            <div class="scan-log"><h4>Scan-Protokoll</h4><ol data-map="log"></ol></div>
+            <div class="legend">
+              <span><i style="background:#6ee7a8"></i>LiDAR: 360°-Abstandsscan</span>
+              <span><i style="background:#7fe3ff;opacity:.6"></i>Kamera: Sichtfeld</span>
+              <span><i style="background:#5f656e"></i>Nicht gescannt</span>
+              <span><i style="background:#ffc43d"></i>Wird gelesen</span>
+              <span><i style="background:#7fe3ff"></i>Gescannt</span>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ USE CASES ============ -->
+    <section class="section section--line">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal>
+            <p class="eyebrow">Gemacht für</p>
+            <h2>Überall, wo sich Bestand schnell bewegt.</h2>
+          </div>
+        </div>
+        <div class="grid-3">
+          <article class="card" data-reveal><span class="num">LAGER</span><h3>Lagerung &amp; Fulfilment</h3><p>Durchgehender Überblick über Regale und Flächen, ohne geplante Inventuren.</p></article>
+          <article class="card" data-reveal style="--d:.08s"><span class="num">DISTRIBUTION</span><h3>Distributionszentren</h3><p>Hoher Durchsatz heißt hohes Fehlerrisiko. Falsch eingelagerte Ware finden, bevor sie falsch verschickt wird.</p></article>
+          <article class="card" data-reveal style="--d:.16s"><span class="num">FORSCHUNG</span><h3>Forschungsumgebungen</h3><p>Eine flexible Plattform, um Ideen zu autonomer Inventur und Sensorfusion zu testen.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BUILD IN PUBLIC ============ -->
+    <section class="section section--line">
+      <div class="container split split--sticky">
+        <div data-reveal>
+          <p class="eyebrow">Fortschritt</p>
+          <h2>Wir entwickeln öffentlich.</h2>
+          <p class="lead">Wir sind ein junges Team und sagen ehrlich, wo wir stehen. Verfolgen Sie, wie BARCONA von der ersten Idee in die Lagerhalle kommt.</p>
+          <a class="link-arrow" href="news.html">Zu den Neuigkeiten <span>→</span></a>
+        </div>
+        <ol class="timeline">
+          <li class="done" data-reveal><time>Sep 2025</time><h3>Die erste Idee</h3><p>Inventuren sind langsam, manuell und am Tag ihres Abschlusses schon veraltet. Wir fragten uns, ob nicht eine Kamera das Zählen übernehmen könnte.</p></li>
+          <li class="done" data-reveal><time>Jan 2026</time><h3>Ein konkretes Konzept</h3><p>Aus der Idee wurde ein Plan: die TraceUnit, ein autonomer Roboter mit Kamera, Barcode-Lesung und LiDAR, der Regale selbstständig scannt.</p></li>
+          <li class="done" data-reveal><time>Feb 2026</time><h3>Die erste Software</h3><p>Die Kernarchitektur für Sensordaten, Datenverarbeitung und Kartierung, dazu ein erster Kameraaufbau, der Barcodes in Live-Bildern findet.</p></li>
+          <li class="done" data-reveal><time>Mär 2026</time><h3>Datensätze &amp; Kamerasteuerung</h3><p>Wir haben begonnen, eigene Datensätze aus echten Lageretiketten aufzubauen, und die Kamera lernte, auf das Erkannte zu schwenken, zu neigen und zu zoomen.</p></li>
+          <li class="done" data-reveal><time>Apr 2026</time><h3>Kameratests</h3><p>Ab Anfang April haben wir die Kamerakette durchgängig mit unseren Datensätzen getestet und dann einen Neige-Scan ergänzt, der ein Regal Ebene für Ebene liest.</p></li>
+          <li class="done" data-reveal><time>Mai 2026</time><h3>Lagersimulation</h3><p>In einer simulierten Halle testen wir Navigation und Scan-Abläufe, bevor sie auf Hardware laufen.</p></li>
+          <li class="done" data-reveal><time>Jun 2026</time><h3>Unser eigenes Erkennungsmodell</h3><p>Wir haben ein Erkennungsmodell mit unseren eigenen Lagerbildern trainiert.</p></li>
+          <li class="done" data-reveal><time>Jul 2026</time><h3>BARCONA AI Software-Kern</h3><p>Der Software-Kern ist fertig: Er macht aus Lagerbildern Barcode-Werte, Regalplätze und Status-Markierungen.</p></li>
+          <li class="next" data-reveal><time>Als Nächstes</time><h3>Testaufbau der Detection Unit</h3><p>Ein erster Testaufbau am Gabelstapler, danach Tests unter echten Lagerbedingungen.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ TEAM TEASER ============ -->
+    <section class="section section--line">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal>
+            <p class="eyebrow">Das Team</p>
+            <h2>Die Menschen hinter BARCONA.</h2>
+          </div>
+          <a class="link-arrow" href="about.html#team" data-reveal>Das Team kennenlernen <span>→</span></a>
+        </div>
+        <div class="team">
+          <article class="person profile" data-reveal>
+            <div class="profile-head">
+              <div class="avatar">KB</div>
+              <div><span class="role">Mitgründer · Lead Software Engineer</span><h3>Kenan Busch</h3></div>
+            </div>
+            <p>Leitet die Software-Architektur von BARCONA AI und ihre Integration in unsere Hardware.</p>
+          </article>
+          <article class="person profile" data-reveal style="--d:.08s">
+            <div class="profile-head">
+              <div class="avatar avatar--cyan">PW</div>
+              <div><span class="role">Mitgründer · Lead AI Engineer</span><h3>Philipp Wirth</h3></div>
+            </div>
+            <p>Leitet die KI hinter BARCONA: die Vision-Modelle, die Barcodes in echten Lagern erkennen und lesen.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="cta-band" data-reveal>
+          <p class="eyebrow">Zusammenarbeiten</p>
+          <h2>Helfen Sie uns, BARCONA in ein echtes Lager zu bringen.</h2>
+          <p>Wir suchen Lager und Logistikteams, die frühen Zugang, direkten Einfluss auf das Produkt und eine enge Zusammenarbeit mit den Menschen wollen, die es entwickeln.</p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="contact.html">Kontakt aufnehmen <span class="arrow">→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div data-include="footer"></div>
+
+  <script src="../src/js/layout.js?v=202611081708"></script>
+  <script src="../src/js/main.js?v=202611081708" defer></script>
+  <script src="../src/js/map-demo.js?v=202611081708" defer></script>
+  <script src="../src/js/package-scene.js?v=202611081708" defer></script>
+  <script src="../src/js/detect-demo.js?v=202611081708" defer></script>
+</body>
+</html>

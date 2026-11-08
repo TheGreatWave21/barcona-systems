@@ -11,6 +11,19 @@
   const hosts = document.querySelectorAll("[data-package-scene]");
   if (!hosts.length) return;
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // German copy (/bs-german/) shares this script
+  const DE = location.pathname.includes("/bs-german/");
+  const L = DE ? {
+    bcam: "BARCODE-KAMERA", cam: "KAMERA", read: "ID GELESEN ✓", matched: "PAKET · ERKANNT",
+    damaged: "Etikett beschädigt, trotzdem erkannt", located: "LOKALISIERT · GANG A04",
+    wrong: "FALSCHER PLATZ", belongs: "GEHÖRT HIERHIN", fixed: "KORRIGIERT ✓",
+    aria: "Ein Paket durchläuft die vier Schritte: Barcode lesen, Kameraerkennung, LiDAR-Ortung und Fehlerprüfung am Regal",
+  } : {
+    bcam: "BARCODE CAMERA", cam: "CAMERA", read: "ID READ ✓", matched: "PACKAGE · MATCHED",
+    damaged: "label damaged, still identified", located: "LOCATED · AISLE A04",
+    wrong: "WRONG SLOT", belongs: "BELONGS HERE", fixed: "FIXED ✓",
+    aria: "A package moving through the four steps: barcode scan, camera recognition, LiDAR positioning and error check on the rack",
+  };
   hosts.forEach(setup);
 
   function setup(host) {
@@ -159,7 +172,7 @@
     return `<g opacity="${o}">${line([x, y, 0], [x, y, z - 0.15], "#3a3d42", 'stroke-width="4"')}
       ${poly([[x - 0.3, y, z - 0.15], [x + 0.3, y, z - 0.15], [x + 0.3, y, z + 0.25], [x - 0.3, y, z + 0.25]], "#2a2d33", 'stroke="#0a0b0d"')}
       ${(() => { const [lx, ly] = P(x, y - 0.001, z + 0.05); return `<circle cx="${lx.toFixed(1)}" cy="${ly.toFixed(1)}" r="5" fill="#0a0b0d" stroke="${C.laser}" stroke-width="1.5"/><circle cx="${(lx - 1.2).toFixed(1)}" cy="${(ly - 1.2).toFixed(1)}" r="1.3" fill="#fff" opacity=".7"/>`; })()}
-      ${(() => { const [sx, sy] = P(x, y, z); return text(sx, sy + 34, "BARCODE CAMERA", active ? C.laser : C.text, 9.5, 600, "middle"); })()}</g>`;
+      ${(() => { const [sx, sy] = P(x, y, z); return text(sx, sy + 34, L.bcam, active ? C.laser : C.text, 9.5, 600, "middle"); })()}</g>`;
   }
   function camera(active) {
     const [x, y, z] = CAMERA;
@@ -168,7 +181,7 @@
     return `<g opacity="${o}"><line x1="${sx.toFixed(1)}" y1="0" x2="${sx.toFixed(1)}" y2="${(sy - 8).toFixed(1)}" stroke="#3a3d42" stroke-width="3"/>
       <rect x="${(sx - 13).toFixed(1)}" y="${(sy - 9).toFixed(1)}" width="26" height="15" rx="3" fill="${C.cam}" stroke="#0a0b0d"/>
       <circle cx="${(sx - 4).toFixed(1)}" cy="${(sy + 6).toFixed(1)}" r="4" fill="#0a0b0d"/>
-      ${text(sx + 18, sy + 1, "CAMERA", active ? C.cam : C.text, 9.5)}</g>`;
+      ${text(sx + 18, sy + 1, L.cam, active ? C.cam : C.text, 9.5)}</g>`;
   }
   function lidar(active) {
     const [x, y, z] = LIDAR;
@@ -212,7 +225,7 @@
         under += poly([[b.x - 0.1, b.y - 0.1, 0.01], [b.x + b.w + 0.1, b.y - 0.1, 0.01], [b.x + b.w + 0.1, b.y + b.d + 0.1, 0.01], [b.x - 0.1, b.y + b.d + 0.1, 0.01]], "rgba(110,231,168,.18)", `stroke="${C.lidar}" stroke-dasharray="4 3"`);
         const [px, py] = P(b.x + b.w / 2, b.y + b.d / 2, b.h + 1.2);
         over += line([b.x + b.w / 2, b.y + b.d / 2, b.h], [b.x + b.w / 2, b.y + b.d / 2, b.h + 1.0], C.lidar, 'stroke-width="1.5"');
-        over += tag(px, py, "LOCATED · AISLE A04", C.lidar);
+        over += tag(px, py, L.located, C.lidar);
       }
     }
     if (key === "recognise") {
@@ -244,13 +257,13 @@
         over += `<polygon points="${s0.join(",")} ${q[0].join(",")} ${q[1].join(",")} ${q[2].join(",")} ${q[3].join(",")}" fill="rgba(255,196,61,${pulse.toFixed(2)})" stroke="rgba(255,196,61,.55)"/>`;
         over += `<polygon points="${q.map((p) => p.join(",")).join(" ")}" fill="none" stroke="${C.laser}" stroke-width="1.5"/>`;
       }
-      if (settled && stepT > 1.4) { const r = screenBounds(b); over += brackets(r, C.ok, 5, 8) + tag((r.x0 + r.x1) / 2, r.y0 - 14, "ID READ ✓", C.ok); }
+      if (settled && stepT > 1.4) { const r = screenBounds(b); over += brackets(r, C.ok, 5, 8) + tag((r.x0 + r.x1) / 2, r.y0 - 14, L.read, C.ok); }
     }
     if (key === "recognise" && settled) {
       const r = screenBounds(b);
       over += brackets(r, C.cam);
-      over += tag((r.x0 + r.x1) / 2, r.y0 - 16, "PACKAGE · MATCHED", C.cam);
-      if (stepT > 1.2) over += text((r.x0 + r.x1) / 2, r.y1 + 22, "label damaged, still identified", C.cam, 9.5, 500, "middle");
+      over += tag((r.x0 + r.x1) / 2, r.y0 - 16, L.matched, C.cam);
+      if (stepT > 1.2) over += text((r.x0 + r.x1) / 2, r.y1 + 22, L.damaged, C.cam, 9.5, 500, "middle");
     }
     let hl = null;
     if (key === "flag") {
@@ -260,23 +273,23 @@
         if (settled) {
           const blink = reduce || Math.sin(t * 6) > -0.3;
           if (blink) over += brackets(r, C.bad);
-          over += tag((r.x0 + r.x1) / 2, r.y0 - 16, "WRONG SLOT", C.bad);
+          over += tag((r.x0 + r.x1) / 2, r.y0 - 16, L.wrong, C.bad);
           // ghost outline where it belongs + arrow
           const g = { ...RIGHT, ...PKG };
           const gr = screenBounds(g);
           over += `<rect x="${gr.x0}" y="${gr.y0}" width="${gr.x1 - gr.x0}" height="${gr.y1 - gr.y0}" fill="none" stroke="${C.ok}" stroke-dasharray="5 4"/>`;
-          over += tag((gr.x0 + gr.x1) / 2, gr.y0 - 16, "BELONGS HERE", C.ok);
+          over += tag((gr.x0 + gr.x1) / 2, gr.y0 - 16, L.belongs, C.ok);
           const ax0 = r.x1 + 10, ax1 = gr.x0 - 10, ay0 = (r.y0 + r.y1) / 2, ay1 = (gr.y0 + gr.y1) / 2;
           over += `<path d="M${ax0},${ay0} Q${(ax0 + ax1) / 2},${Math.min(ay0, ay1) - 50} ${ax1},${ay1}" fill="none" stroke="${C.ok}" stroke-width="2" stroke-dasharray="6 4"/>`;
           over += `<polygon points="${ax1},${ay1} ${ax1 - 10},${ay1 - 8} ${ax1 - 12},${ay1 + 3}" fill="${C.ok}"/>`;
         }
       } else {
         hl = { bay: 2, color: settled ? C.ok : C.label };
-        if (settled) { over += brackets(r, C.ok); over += tag((r.x0 + r.x1) / 2, r.y0 - 16, "FIXED ✓", C.ok); }
+        if (settled) { over += brackets(r, C.ok); over += tag((r.x0 + r.x1) / 2, r.y0 - 16, L.fixed, C.ok); }
       }
     }
 
-    return `<svg viewBox="0 0 600 440" role="img" aria-label="A package moving through the four steps: barcode scan, camera recognition, LiDAR positioning and error check on the rack">
+    return `<svg viewBox="0 0 600 440" role="img" aria-label="${L.aria}">
       ${floorSVG()}${rackBack()}${under}${boxes}${rackFront(hl)}
       ${scanner(key === "scan")}${lidar(key === "map")}${camera(key === "recognise")}
       ${over}

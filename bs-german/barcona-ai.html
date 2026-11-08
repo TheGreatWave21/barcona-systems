@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="de" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BARCONA AI | Barcona Systems</title>
+  <meta name="description" content="BARCONA AI macht aus Kamerabildern und Videos aus dem Lager verlässliche Bestandsdaten: Barcodes gelesen, ihrem Lagerplatz zugeordnet und alles Unklare markiert.">
+  <meta name="theme-color" content="#0a0b0d">
+  <link rel="alternate" hreflang="en" href="../barcona-ai.html">
+  <link rel="icon" href="../public/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../src/css/tokens.css?v=202611081708">
+  <link rel="stylesheet" href="../src/css/base.css?v=202611081708">
+  <link rel="stylesheet" href="../src/css/components.css?v=202611081708">
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <p class="crumbs"><a href="index.html">Start</a> / BARCONA AI</p>
+        <p class="eyebrow">Der Software-Kern</p>
+        <h1>Ein Lagerbild. Ein strukturiertes Ergebnis.</h1>
+        <p class="lead">BARCONA AI ist die Software hinter jedem Barcona-Produkt. Sie macht aus Kamerabildern und Videos aus Ihrem Lager Bestandsdaten, auf die Sie sich verlassen können.</p>
+        <div class="btn-row" style="margin-top:2rem">
+          <a class="btn btn-primary" href="contact.html">Kontakt aufnehmen <span class="arrow">→</span></a>
+          <a class="btn btn-ghost" href="#result">Ein Ergebnis ansehen</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal><p class="eyebrow">Was es tut</p><h2>Vom Bild zu Bestandsdaten.</h2></div>
+          <p class="lead" data-reveal>Es spielt keine Rolle, woher das Bild kommt. Eine Staplerkamera, ein Roboter oder ein einzelnes Foto liefern dieselbe Art von Ergebnis.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card" data-reveal><span class="num">01</span><h3>Findet jeden Barcode</h3><p>Paket- und Regaletiketten werden automatisch in Bildern und Videos gefunden.</p></article>
+          <article class="card" data-reveal style="--d:.06s"><span class="num">02</span><h3>Weiß, wo es hingehört</h3><p>Jedes Paket wird dem Lagerplatz zugeordnet, an dem es liegt.</p></article>
+          <article class="card" data-reveal style="--d:.12s"><span class="num">03</span><h3>Markiert Unklares</h3><p>Was nicht zuverlässig lesbar ist, bleibt für eine kurze Prüfung sichtbar. Nichts wird geraten.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--line" id="result">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal><p class="eyebrow">Ein Ergebnis</p><h2>Was BARCONA im Regal sieht.</h2></div>
+          <p class="lead" data-reveal>Barcodes werden gelesen und ihrem Regal zugeordnet, Unlesbares bleibt sichtbar, und das Ergebnis ist bereit für Excel oder Ihre eigenen Systeme.</p>
+        </div>
+        <div data-reveal>
+          <div data-include="detect"></div>
+          <p class="dd-caption">Vereinfachte Illustration eines BARCONA-AI-Ergebnisses. BARCONA AI erkennt auch den Pfeil auf dem Regaletikett und weiß so, zu welcher Ebene das Etikett gehört. Etiketten und IDs sind fiktiv.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta-band" data-reveal>
+          <p class="eyebrow">Zwei Einsatzwege</p>
+          <h2>Ein Kern. Ihre Wahl der Hardware.</h2>
+          <p>Betreiben Sie BARCONA AI mit Kameras an Ihren vorhandenen Gabelstaplern oder auf einem autonomen Roboter mit eigenen Routen.</p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="detection-unit.html">Detection Unit <span class="arrow">→</span></a>
+            <a class="btn btn-ghost" href="traceunit.html">TraceUnit</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div data-include="footer"></div>
+  <script src="../src/js/layout.js?v=202611081708"></script>
+  <script src="../src/js/main.js?v=202611081708" defer></script>
+  <script src="../src/js/detect-demo.js?v=202611081708" defer></script>
+</body>
+</html>
