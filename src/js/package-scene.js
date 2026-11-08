@@ -8,10 +8,22 @@
    The active step comes from data-active on .scene-figure (main.js).
    ========================================================== */
 (function () {
-  const host = document.querySelector("[data-package-scene]");
-  if (!host) return;
-  const figure = host.closest(".scene-figure");
+  const hosts = document.querySelectorAll("[data-package-scene]");
+  if (!hosts.length) return;
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  hosts.forEach(setup);
+
+  function setup(host) {
+  // Step source: the scroll scene's data-active, or (data-auto) a timed loop
+  const figure = host.closest(".scene-figure");
+  const AUTO = [["scan", 4.2], ["recognise", 4.2], ["map", 4.2], ["flag", 6.5]];
+  let autoI = 0, autoT = 0;
+  const activeKey = (dt) => {
+    if (figure) return figure.dataset.active || "scan";
+    autoT += dt;
+    if (autoT > AUTO[autoI][1]) { autoT = 0; autoI = (autoI + 1) % AUTO.length; }
+    return AUTO[autoI][0];
+  };
 
   const C = {
     floor: "#14171c", grid: "rgba(255,255,255,.05)", rack: "#d9561d", rackDim: "#7a3a1c",
@@ -273,7 +285,7 @@
 
   function tick(now) {
     const dt = Math.min(0.05, (now - last) / 1000 || 0); last = now;
-    const k = (figure && figure.dataset.active) || "scan";
+    const k = activeKey(dt);
     if (k !== key) {
       if (k === "scan" && key !== "scan") Object.assign(pkg, { x: -1.5, y: STATION.scan.y, z: 0 }); // next package slides in
       key = k; stepT = 0;
@@ -290,7 +302,7 @@
 
   if (reduce) {
     // static: redraw whenever the active step changes
-    const draw = () => { key = (figure && figure.dataset.active) || "scan"; stepT = 2; Object.assign(pkg, targetFor(key, 2)); host.innerHTML = render(0); };
+    const draw = () => { key = figure ? figure.dataset.active || "scan" : "map"; stepT = 2; Object.assign(pkg, targetFor(key, 2)); host.innerHTML = render(0); };
     draw();
     if (figure) new MutationObserver(draw).observe(figure, { attributes: true, attributeFilter: ["data-active"] });
     return;
@@ -303,4 +315,5 @@
     }
     else if (!e.isIntersecting) running = false;
   })).observe(host);
+  }
 })();
