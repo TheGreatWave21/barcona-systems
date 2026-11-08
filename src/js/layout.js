@@ -95,7 +95,7 @@
       </div>
     </footer>`;
 
-  /* TraceUnit-1-30x, modelled on the CAD screenshots (Aug 2025).
+  /* TraceUnit-1-30x, modelled on the CAD screenshots (Jan 2026).
      A small 3D model drawn with a proper axonometric projection:
      every circle (wheels, LiDAR, domes) is sampled in 3D and projected,
      so nothing is skewed. Animated layers (LiDAR sweep, laser, camera
